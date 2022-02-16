@@ -19,7 +19,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.8.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core:3.22.0")
-    testImplementation("com.approvaltests:approvaltests:13.3.0")
+    testImplementation("com.approvaltests:approvaltests:13.4.0")
     testImplementation("com.larseckart:junit-tcr-extensions:0.0.1")
 }
 
