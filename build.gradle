@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'info.solidsoft.pitest' version '1.7.0'
 }
 
 java {
@@ -48,4 +49,15 @@ jacocoTestReport {
         csv.required = false
         html.destination file("${buildDir}/jacocoHtml")
     }
+}
+
+pitest {
+    junit5PluginVersion = '0.15'
+    testSourceSets = [sourceSets.test]
+    mainSourceSets = [sourceSets.main]
+    targetClasses = ['kata.*']
+    pitestVersion = '1.7.0'
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+    timestampedReports = false
 }
