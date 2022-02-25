@@ -10,9 +10,9 @@ public class DeliveryController {
   private final MapService _mapService;
   public List<Delivery> deliverySchedule;
 
-  public DeliveryController(List<Delivery> deliverySchedule) {
+  public DeliveryController(List<Delivery> deliverySchedule, EmailGateway emailGateway) {
     this.deliverySchedule = deliverySchedule;
-    this._emailGateway = new EmailGateway();
+    this._emailGateway = emailGateway;
     this._mapService = new MapService();
   }
 
