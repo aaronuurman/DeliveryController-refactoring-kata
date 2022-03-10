@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'info.solidsoft.pitest' version '1.7.0'
+    id("com.github.johnrengelman.shadow") version "7.1.1"
+    id("io.micronaut.application") version "3.2.2"
 }
 
 java {
@@ -15,7 +17,15 @@ repositories {
 }
 
 dependencies {
-    implementation("com.sun.mail:jakarta.mail:2.0.1")
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("com.sendgrid:sendgrid-java:4.9.0")
+    implementation("com.twilio.sdk:twilio:8.27.1")
 
     testImplementation(platform("org.junit:junit-bom:5.8.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
@@ -29,6 +39,20 @@ dependencies {
 tasks.withType(JavaCompile) {
     options.compilerArgs.add("-Xlint:all")
     options.incremental = true
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("kata.*")
+    }
+}
+graalvmNative.toolchainDetection = false
+
+application {
+    mainClass.set("kata.Application")
 }
 
 test {

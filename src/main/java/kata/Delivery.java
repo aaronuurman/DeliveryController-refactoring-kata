@@ -5,89 +5,98 @@ import java.util.Objects;
 
 public final class Delivery {
 
-  private long id;
+  private Long id;
   private String contactEmail;
-  private Location location;
+  private float latitude;
+  private float longitude;
   private LocalDateTime timeOfDelivery;
   private boolean arrived;
   private boolean onTime;
 
-  public Delivery(long id, String contactEmail, Location location, LocalDateTime timeOfDelivery,
-      boolean arrived, boolean onTime) {
+  public Delivery(Long id, String contactEmail, float latitude, float longitude,
+      LocalDateTime timeOfDelivery, boolean arrived, boolean onTime) {
     this.id = id;
     this.contactEmail = contactEmail;
-    this.location = location;
+    this.latitude = latitude;
+    this.longitude = longitude;
     this.timeOfDelivery = timeOfDelivery;
     this.arrived = arrived;
     this.onTime = onTime;
   }
 
-  public long id() {
+  public long getId() {
     return id;
   }
 
-  public String contactEmail() {
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public String getContactEmail() {
     return contactEmail;
   }
 
-  public Location location() {
-    return location;
+  public void setContactEmail(String contactEmail) {
+    this.contactEmail = contactEmail;
   }
 
-  public LocalDateTime timeOfDelivery() {
+  public float getLatitude() {
+    return latitude;
+  }
+
+  public void setLatitude(float latitude) {
+    this.latitude = latitude;
+  }
+
+  public float getLongitude() {
+    return longitude;
+  }
+
+  public void setLongitude(float longitude) {
+    this.longitude = longitude;
+  }
+
+  public LocalDateTime getTimeOfDelivery() {
     return timeOfDelivery;
-  }
-
-  public boolean arrived() {
-    return arrived;
   }
 
   public void setTimeOfDelivery(LocalDateTime timeOfDelivery) {
     this.timeOfDelivery = timeOfDelivery;
   }
 
+  public boolean isArrived() {
+    return arrived;
+  }
+
   public void setArrived(boolean arrived) {
     this.arrived = arrived;
+  }
+
+  public boolean isOnTime() {
+    return onTime;
   }
 
   public void setOnTime(boolean onTime) {
     this.onTime = onTime;
   }
 
-  public boolean onTime() {
-    return onTime;
-  }
-
   @Override
-  public boolean equals(Object obj) {
-    if (obj == this) {
+  public boolean equals(Object o) {
+    if (this == o) {
       return true;
     }
-    if (obj == null || obj.getClass() != this.getClass()) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    var that = (Delivery) obj;
-    return Objects.equals(this.id, that.id) &&
-        Objects.equals(this.contactEmail, that.contactEmail) &&
-        Objects.equals(this.location, that.location) &&
-        Objects.equals(this.timeOfDelivery, that.timeOfDelivery) &&
-        this.arrived == that.arrived &&
-        this.onTime == that.onTime;
+    Delivery delivery = (Delivery) o;
+    return Float.compare(delivery.latitude, latitude) == 0
+        && Float.compare(delivery.longitude, longitude) == 0 && arrived == delivery.arrived
+        && onTime == delivery.onTime && id.equals(delivery.id) && contactEmail.equals(
+        delivery.contactEmail) && timeOfDelivery.equals(delivery.timeOfDelivery);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, contactEmail, location, timeOfDelivery, arrived, onTime);
-  }
-
-  @Override
-  public String toString() {
-    return "Delivery[" +
-        "id=" + id + ", " +
-        "contactEmail=" + contactEmail + ", " +
-        "location=" + location + ", " +
-        "timeOfDelivery=" + timeOfDelivery + ", " +
-        "arrived=" + arrived + ", " +
-        "onTime=" + onTime + ']';
+    return Objects.hash(id, contactEmail, latitude, longitude, timeOfDelivery, arrived, onTime);
   }
 }

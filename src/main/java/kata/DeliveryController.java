@@ -1,57 +1,39 @@
 package kata;
 
-import java.time.Duration;
-import java.time.format.DateTimeFormatter;
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.MediaType;
+import io.micronaut.http.annotation.Consumes;
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Post;
+import jakarta.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
+
+/*
+##########################################################################################
+  No need to read this class, it is not part of this exercise!!!!!!!!!!!!!!!!! (yet)
+##########################################################################################
+ */
+@Controller("/delivery")
 public class DeliveryController {
 
-  private final EmailGateway _emailGateway;
-  private final MapService _mapService;
-  public List<Delivery> deliverySchedule;
+  @Inject
+  DeliveryService deliveryService;
 
-  public DeliveryController(List<Delivery> deliverySchedule) {
-    this.deliverySchedule = deliverySchedule;
-    this._emailGateway = new EmailGateway();
-    this._mapService = new MapService();
+/*
+##########################################################################################
+  No need to read this method, it is not part of this exercise!!!!!!!!!!!!!!!!! (yet)
+##########################################################################################
+ */
+  @Consumes({MediaType.APPLICATION_JSON})
+  @Post
+  public HttpResponse<Void> onDelivery(DeliveryEvent deliveryEvent) {
+    // from database, find all deliveries for today that are not delivered yet
+    List<Delivery> deliverySchedule = new ArrayList<>();
+    deliveryService.on(deliveryEvent, deliverySchedule);
+    // update deliveries in database
+    return HttpResponse.ok();
   }
 
-  public void updateDelivery(DeliveryEvent deliveryEvent) {
-    Delivery nextDelivery = null;
-    for (int i = 0; i < deliverySchedule.size(); i++) {
-      Delivery delivery = deliverySchedule.get(i);
-      if (deliveryEvent.id() == delivery.id()) {
-        delivery.setArrived(true);
-        Duration d = Duration.between(delivery.timeOfDelivery(), deliveryEvent.timeOfDelivery());
-
-        if (d.toMinutes() < 10) {
-          delivery.setOnTime(true);
-        }
-        delivery.setTimeOfDelivery(deliveryEvent.timeOfDelivery());
-        String message = "Regarding your delivery today at %s. How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>".formatted(
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(delivery.timeOfDelivery()));
-        _emailGateway.send(delivery.contactEmail(), "Your feedback is important to us", message);
-        if (deliverySchedule.size() > i + 1) {
-          nextDelivery = deliverySchedule.get(i + 1);
-        }
-
-        if (!delivery.onTime() && deliverySchedule.size() > 1 && i > 0) {
-          var previousDelivery = deliverySchedule.get(i - 1);
-          Duration elapsedTime = Duration.between(previousDelivery.timeOfDelivery(),
-              delivery.timeOfDelivery());
-          _mapService.updateAverageSpeed(previousDelivery.location(), delivery.location(),
-              elapsedTime);
-        }
-      }
-    }
-
-    if (nextDelivery != null) {
-      var nextEta = _mapService.calculateETA(deliveryEvent.location(), nextDelivery.location());
-      var message =
-
-          "Your delivery to %s is next, estimated time of arrival is in %s minutes. Be ready!".formatted(
-              nextDelivery.location(), nextEta.getSeconds() / 60);
-      _emailGateway.send(nextDelivery.contactEmail(), "Your delivery will arrive soon", message);
-    }
-  }
 }
