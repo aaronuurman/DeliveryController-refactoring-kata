@@ -68,6 +68,7 @@ jacoco {
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.required = false
         csv.required = false
@@ -75,6 +76,7 @@ jacocoTestReport {
     }
 }
 
+project.tasks.check.dependsOn("pitest")
 pitest {
     junit5PluginVersion = '0.15'
     testSourceSets = [sourceSets.test]
