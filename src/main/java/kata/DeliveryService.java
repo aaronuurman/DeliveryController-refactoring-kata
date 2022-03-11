@@ -8,8 +8,8 @@ import java.util.List;
 @Singleton
 public class DeliveryService {
 
-  private SendgridEmailGateway emailGateway;
-  private MapService mapService = new MapService();
+  private final SendgridEmailGateway emailGateway;
+  private final MapService mapService = new MapService();
 
   public DeliveryService() {
     emailGateway = new SendgridEmailGateway();
