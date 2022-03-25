@@ -19,12 +19,16 @@ import static org.mockito.Mockito.verify;
         //@ExtendWith(SilentTestCommitRevertMainExtension.class)
 class DeliveryServiceTest {
 
-    static List<Integer> deliveryTimes() {
+    static List<Integer> onTimeDeliveryTimes() {
         return List.of(-2, 0, ALLOWED_DELAY_IN_MINUTES - 1);
     }
 
+    static List<Integer> lateDeliveryTimes() {
+        return List.of(ALLOWED_DELAY_IN_MINUTES, ALLOWED_DELAY_IN_MINUTES + 1);
+    }
+
     @ParameterizedTest
-    @MethodSource("deliveryTimes")
+    @MethodSource("onTimeDeliveryTimes")
     void onDelivery_withInAllowedTime_correctData(Integer time) {
         // Arrange
         var deliveryTime = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
@@ -55,8 +59,9 @@ class DeliveryServiceTest {
                 .isOnTime(true);
     }
 
-    @Test
-    void onDelivery_late_correctData() {
+    @ParameterizedTest
+    @MethodSource("lateDeliveryTimes")
+    void onDelivery_late_correctData(Integer time) {
         // Arrange
         var deliveryTime = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
         var deliveryEvent = new DeliveryEvent(123L, deliveryTime, 58.366190f, 26.739820f);
@@ -65,7 +70,7 @@ class DeliveryServiceTest {
                 "test1@example.com",
                 58.366191f,
                 26.739824f,
-                deliveryTime.minusMinutes(ALLOWED_DELAY_IN_MINUTES + 1),
+                deliveryTime.minusMinutes(time),
                 false,
                 false
         );
@@ -87,7 +92,7 @@ class DeliveryServiceTest {
     }
 
     @Test
-    void onDelivery_recommendation_email_sent() {
+    void onDelivery_recommendationEmailSent() {
         // Arrange
         var deliveryTime = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
         var deliveryEvent = new DeliveryEvent(123L, deliveryTime, 58.366190f, 26.739820f);
@@ -114,4 +119,90 @@ class DeliveryServiceTest {
                 "Regarding your delivery today at 2022-03-14 16:34. How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>"
         );
     }
+
+    @Test
+    void onDelivery_whenNextScheduled_upcomingDeliveryEmailSent() {
+        // Arrange
+        var deliveryTime = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
+        var deliveryEvent = new DeliveryEvent(123L, deliveryTime, 58.366190f, 26.739820f);
+        var scheduledDelivery = new Delivery(
+                123L,
+                "test1@example.com",
+                58.366191f,
+                26.739824f,
+                deliveryTime.plusMinutes(2),
+                false,
+                false
+        );
+        var nextScheduledDelivery = new Delivery(
+                124L,
+                "test2@example.com",
+                58.366291f,
+                28.739834f,
+                deliveryTime.plusMinutes(10),
+                false,
+                false
+        );
+        var deliverySchedule = List.of(scheduledDelivery, nextScheduledDelivery);
+        var sendgridEmailGateway = mock(SendgridEmailGateway.class);
+        var deliveryService = new DeliveryService(sendgridEmailGateway);
+
+        // Act
+        deliveryService.on(deliveryEvent, deliverySchedule);
+
+        // Arrange
+        verify(sendgridEmailGateway).send(
+                nextScheduledDelivery.getContactEmail(),
+                "Your delivery will arrive soon",
+                "Your delivery to [58.36629,28.739834] is next, estimated time of arrival is in 140 minutes. Be ready!"
+        );
+    }
+
+    @Test
+    void onDelivery_multipleDeliveriesLate_newAverageSpeed() {
+        // Arrange
+        var deliveryTime = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
+        var deliveryEvent = new DeliveryEvent(124L, deliveryTime, 58.366190f, 26.739820f);
+        var nextScheduledDelivery = new Delivery(
+                125L,
+                "test3@example.com",
+                58.366291f,
+                28.739834f,
+                deliveryTime.minusMinutes(15),
+                false,
+                false
+        );
+        var deliverySchedule = List.of(
+                new Delivery(
+                        123L,
+                        "test1@example.com",
+                        58.366191f,
+                        26.739824f,
+                        deliveryTime.minusMinutes(20),
+                        false,
+                        false),
+                new Delivery(
+                        124L,
+                        "test2@example.com",
+                        58.366191f,
+                        27.739824f,
+                        deliveryTime.minusMinutes(23),
+                        false,
+                        false),
+                nextScheduledDelivery
+        );
+        var sendgridEmailGateway = mock(SendgridEmailGateway.class);
+        var deliveryService = new DeliveryService(sendgridEmailGateway);
+
+        // Act
+        deliveryService.on(deliveryEvent, deliverySchedule);
+
+        // Arrange
+        verify(sendgridEmailGateway).send(
+                nextScheduledDelivery.getContactEmail(),
+                "Your delivery will arrive soon",
+                "Your delivery to [58.36629,28.739834] is next, estimated time of arrival is in 39 minutes. Be ready!"
+        );
+    }
+
 }
