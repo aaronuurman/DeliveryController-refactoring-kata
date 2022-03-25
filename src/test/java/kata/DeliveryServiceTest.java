@@ -4,11 +4,11 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.approvaltests.Approvals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static kata.DeliveryAssert.assertThatDelivery;
 import static kata.DeliveryService.ALLOWED_DELAY_IN_MINUTES;
 import static kata.DeliveryService.DATE_TIME_FORMATTER;
 import static org.mockito.ArgumentMatchers.anyFloat;
@@ -49,14 +49,7 @@ class DeliveryServiceTest {
         var result = deliveryService.on(deliveryEvent, deliverySchedule);
 
         // Assert
-        assertThatDelivery(result.get(0))
-                .hasId(deliveryEvent.id())
-                .hasContactEmail(scheduledDelivery.getContactEmail())
-                .hasLatitude(scheduledDelivery.getLatitude())
-                .hasLongitude(scheduledDelivery.getLongitude())
-                .hasTimeOfDelivery(deliveryEvent.timeOfDelivery())
-                .hasArrived(true)
-                .isOnTime(true);
+        Approvals.verify(result);
     }
 
     @ParameterizedTest
@@ -81,14 +74,7 @@ class DeliveryServiceTest {
         var result = deliveryService.on(deliveryEvent, deliverySchedule);
 
         // Assert
-        assertThatDelivery(result.get(0))
-                .hasId(deliveryEvent.id())
-                .hasContactEmail(scheduledDelivery.getContactEmail())
-                .hasLatitude(scheduledDelivery.getLatitude())
-                .hasLongitude(scheduledDelivery.getLongitude())
-                .hasTimeOfDelivery(deliveryEvent.timeOfDelivery())
-                .hasArrived(true)
-                .isOnTime(false);
+        Approvals.verify(result);
     }
 
     @Test
