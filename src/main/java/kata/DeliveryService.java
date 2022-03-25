@@ -13,10 +13,11 @@ public class DeliveryService {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
   private final SendgridEmailGateway emailGateway;
-  private final MapService mapService = new MapService();
+  private final MapService mapService;
 
-  public DeliveryService(SendgridEmailGateway sendgridEmailGateway) {
+  public DeliveryService(SendgridEmailGateway sendgridEmailGateway, MapService mapService) {
       this.emailGateway = sendgridEmailGateway;
+      this.mapService = mapService;
   }
 
   public List<Delivery> on(DeliveryEvent deliveryEvent, List<Delivery> deliverySchedule) {
@@ -24,7 +25,7 @@ public class DeliveryService {
     for (int i = 0; i < deliverySchedule.size(); i++) {
       Delivery delivery = deliverySchedule.get(i);
       if (deliveryEvent.id() == delivery.getId()) {
-        delivery.setArrived(true);
+          delivery.setArrived(true);
         Duration d = Duration.between(delivery.getTimeOfDelivery(), deliveryEvent.timeOfDelivery());
 
         if (d.toMinutes() < ALLOWED_DELAY_IN_MINUTES) {
