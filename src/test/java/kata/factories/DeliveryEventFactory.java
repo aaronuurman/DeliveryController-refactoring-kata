@@ -16,4 +16,8 @@ public final class DeliveryEventFactory {
     public static DeliveryEvent createDeliveryEvent() {
         return new DeliveryEvent(123L, DELIVERY_TIME, 58.366190f, 26.739820f);
     }
+
+    public static DeliveryEvent createDeliveryEvent(long id) {
+        return new DeliveryEvent(id, DELIVERY_TIME, 58.366190f, 26.739820f);
+    }
 }

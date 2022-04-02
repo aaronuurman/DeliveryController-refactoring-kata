@@ -1,16 +1,15 @@
 package kata;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.List;
 
 import org.approvaltests.Approvals;
 import org.junit.jupiter.api.Test;
 
 import static kata.DeliveryService.ALLOWED_DELAY_IN_MINUTES;
-import static kata.DeliveryService.DATE_TIME_FORMATTER;
 import static kata.factories.DeliveryEventFactory.DELIVERY_TIME;
 import static kata.factories.DeliveryEventFactory.createDeliveryEvent;
+import static kata.factories.DeliveryFactory.createLateScheduleWithThreeDeliveries;
+import static kata.factories.DeliveryFactory.createOnTimeScheduleWithTwoDeliveries;
 import static kata.factories.DeliveryFactory.createScheduleWithSingleDelivery;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -142,27 +141,8 @@ class DeliveryServiceTest {
     @Test
     void onDelivery_whenNextScheduled_upcomingDeliveryEmailSent() {
         // Arrange
-        var deliveryTime = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
-        var deliveryEvent = new DeliveryEvent(123L, deliveryTime, 58.366190f, 26.739820f);
-        var scheduledDelivery = new Delivery(
-                123L,
-                "test1@example.com",
-                58.366191f,
-                26.739824f,
-                deliveryTime.plusMinutes(2),
-                false,
-                false
-        );
-        var nextScheduledDelivery = new Delivery(
-                124L,
-                "test2@example.com",
-                58.366291f,
-                28.739834f,
-                deliveryTime.plusMinutes(10),
-                false,
-                false
-        );
-        var deliverySchedule = List.of(scheduledDelivery, nextScheduledDelivery);
+        var deliveryEvent = createDeliveryEvent();
+        var schedule = createOnTimeScheduleWithTwoDeliveries(DELIVERY_TIME.plusMinutes(2));
         var sendgridEmailGateway = mock(SendgridEmailGateway.class);
         var eta = Duration.ofMinutes(10);
         var mapService = mock(MapService.class);
@@ -170,11 +150,11 @@ class DeliveryServiceTest {
         var deliveryService = new DeliveryService(sendgridEmailGateway, mapService);
 
         // Act
-        deliveryService.on(deliveryEvent, deliverySchedule);
+        deliveryService.on(deliveryEvent, schedule);
 
         // Arrange
         verify(sendgridEmailGateway).send(
-                nextScheduledDelivery.getContactEmail(),
+                schedule.get(1).getContactEmail(),
                 "Your delivery will arrive soon",
                 "Your delivery to [58.36629,28.739834] is next, estimated time of arrival is in 10 minutes. Be ready!"
         );
@@ -183,36 +163,8 @@ class DeliveryServiceTest {
     @Test
     void onDelivery_multipleDeliveriesLate_newAverageSpeed() {
         // Arrange
-        var deliveryTime = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
-        var deliveryEvent = new DeliveryEvent(124L, deliveryTime, 58.366190f, 26.739820f);
-        var nextScheduledDelivery = new Delivery(
-                125L,
-                "test3@example.com",
-                58.366291f,
-                28.739834f,
-                deliveryTime.minusMinutes(15),
-                false,
-                false
-        );
-        var deliverySchedule = List.of(
-                new Delivery(
-                        123L,
-                        "test1@example.com",
-                        58.366191f,
-                        26.739824f,
-                        deliveryTime.minusMinutes(20),
-                        false,
-                        false),
-                new Delivery(
-                        124L,
-                        "test2@example.com",
-                        58.366191f,
-                        27.739824f,
-                        deliveryTime.minusMinutes(23),
-                        false,
-                        false),
-                nextScheduledDelivery
-        );
+        var deliveryEvent = createDeliveryEvent(124);
+        var schedule = createLateScheduleWithThreeDeliveries(DELIVERY_TIME.minusMinutes(15));
         var sendgridEmailGateway = mock(SendgridEmailGateway.class);
         var eta = Duration.ofMinutes(10);
         var mapService = mock(MapService.class);
@@ -220,11 +172,11 @@ class DeliveryServiceTest {
         var deliveryService = new DeliveryService(sendgridEmailGateway, mapService);
 
         // Act
-        deliveryService.on(deliveryEvent, deliverySchedule);
+        deliveryService.on(deliveryEvent, schedule);
 
         // Arrange
         verify(sendgridEmailGateway).send(
-                nextScheduledDelivery.getContactEmail(),
+                schedule.get(2).getContactEmail(),
                 "Your delivery will arrive soon",
                 "Your delivery to [58.36629,28.739834] is next, estimated time of arrival is in 10 minutes. Be ready!"
         );
@@ -233,36 +185,8 @@ class DeliveryServiceTest {
     @Test
     void onDelivery_averageSpeedIsUpdated() {
         // Arrange
-        var deliveryTime = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
-        var deliveryEvent = new DeliveryEvent(124L, deliveryTime, 58.366190f, 26.739820f);
-        var nextScheduledDelivery = new Delivery(
-                125L,
-                "test3@example.com",
-                58.366291f,
-                28.739834f,
-                deliveryTime.minusMinutes(15),
-                false,
-                false
-        );
-        var deliverySchedule = List.of(
-                new Delivery(
-                        123L,
-                        "test1@example.com",
-                        58.366191f,
-                        26.739824f,
-                        deliveryTime.minusMinutes(20),
-                        false,
-                        false),
-                new Delivery(
-                        124L,
-                        "test2@example.com",
-                        58.366191f,
-                        27.739824f,
-                        deliveryTime.minusMinutes(23),
-                        false,
-                        false),
-                nextScheduledDelivery
-        );
+        var deliveryEvent = createDeliveryEvent(124);
+        var schedule = createLateScheduleWithThreeDeliveries(DELIVERY_TIME.minusMinutes(15));
         var sendgridEmailGateway = mock(SendgridEmailGateway.class);
         var eta = Duration.ofMinutes(10);
         var mapService = mock(MapService.class);
@@ -270,7 +194,7 @@ class DeliveryServiceTest {
         var deliveryService = new DeliveryService(sendgridEmailGateway, mapService);
 
         // Act
-        deliveryService.on(deliveryEvent, deliverySchedule);
+        deliveryService.on(deliveryEvent, schedule);
 
         // Assert
         verify(mapService, times(1)).updateAverageSpeed(
