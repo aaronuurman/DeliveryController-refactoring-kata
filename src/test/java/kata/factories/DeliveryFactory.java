@@ -45,15 +45,18 @@ public final class DeliveryFactory {
         );
     }
 
+    /**
+     * This case is valid for example when something unexpected happened on the road.
+     */
     public static List<Delivery> createLateScheduleWithThreeDeliveries(LocalDateTime deliveryTime) {
         return List.of(
-                createDeliveryWithTime(deliveryTime.minusMinutes(5)),
+                createDeliveryWithTime(deliveryTime.minusMinutes(132)),
                 new Delivery(
                         124L,
                         "test2@example.com",
                         VORU_LEPA_2.getLatitude(),
                         VORU_LEPA_2.getLongitude(),
-                        deliveryTime.minusMinutes(8),
+                        deliveryTime.minusMinutes(65),
                         false,
                         false
                 ),

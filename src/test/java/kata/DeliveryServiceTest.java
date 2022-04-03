@@ -190,7 +190,7 @@ class DeliveryServiceTest {
 
         // Assert
         verify(mapServiceMock, times(1)).updateAverageSpeed(
-                Duration.ofMinutes(20),
+                Duration.ofMinutes(147),
                 deliveryEvent.latitude(),
                 deliveryEvent.longitude(),
                 VORU_LEPA_2.getLatitude(),
@@ -199,5 +199,6 @@ class DeliveryServiceTest {
     }
 
     // TODO: Create test case, where delivery is early with next scheduled delivery. Validate that also then. mapService.updateAverageSpeed() is called.
+    // TODO: Potential bug in time calculation of the upcoming delivery email.
 
 }
