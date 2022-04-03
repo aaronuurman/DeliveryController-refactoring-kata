@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static kata.DeliveryService.ALLOWED_DELAY_IN_MINUTES;
+import static kata.factories.CoordinatesFactory.VORU_LEPA_2;
 import static kata.factories.DeliveryEventFactory.DELIVERY_TIME;
 import static kata.factories.DeliveryEventFactory.createDeliveryEvent;
 import static kata.factories.DeliveryFactory.createLateScheduleWithThreeDeliveries;
@@ -155,7 +156,7 @@ class DeliveryServiceTest {
         verify(sendgridEmailGatewayMock).send(
                 schedule.get(1).getContactEmail(),
                 "Your delivery will arrive soon",
-                "Your delivery to [58.36629,28.739834] is next, estimated time of arrival is in 10 minutes. Be ready!"
+                "Your delivery to [57.840694,27.004316] is next, estimated time of arrival is in 10 minutes. Be ready!"
         );
     }
 
@@ -173,7 +174,7 @@ class DeliveryServiceTest {
         verify(sendgridEmailGatewayMock).send(
                 schedule.get(2).getContactEmail(),
                 "Your delivery will arrive soon",
-                "Your delivery to [58.36629,28.739834] is next, estimated time of arrival is in 10 minutes. Be ready!"
+                "Your delivery to [58.362286,25.58746] is next, estimated time of arrival is in 10 minutes. Be ready!"
         );
     }
 
@@ -190,11 +191,13 @@ class DeliveryServiceTest {
         // Assert
         verify(mapServiceMock, times(1)).updateAverageSpeed(
                 Duration.ofMinutes(20),
-                58.36619f,
-                26.739824f,
-                58.36619f,
-                27.739824f
+                deliveryEvent.latitude(),
+                deliveryEvent.longitude(),
+                VORU_LEPA_2.getLatitude(),
+                VORU_LEPA_2.getLongitude()
         );
     }
+
+    // TODO: Create test case, where delivery is early with next scheduled delivery. Validate that also then. mapService.updateAverageSpeed() is called.
 
 }
