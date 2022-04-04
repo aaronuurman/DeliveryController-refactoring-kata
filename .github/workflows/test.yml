@@ -38,7 +38,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/reports/pitest/*/
+          publish_dir: ./build/reports/pitest/*
   auto-merge:
     needs: build
     runs-on: ubuntu-latest
