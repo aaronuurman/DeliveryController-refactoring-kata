@@ -34,8 +34,6 @@ jobs:
         run: ./gradlew --no-daemon --parallel --continue --build-cache --stacktrace test
       - name: Run Gradle's mutation testing task
         run: ./gradlew pitest
-      - name: List files
-        run: ls -la build/reports/pitest/
       - name: Deploy mutation testing reports
         uses: peaceiris/actions-gh-pages@v3
         with:
