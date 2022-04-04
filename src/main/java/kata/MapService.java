@@ -11,6 +11,10 @@ public class MapService {
   private final int SECONDS_PER_HOUR = 3600;
   private final double R = 6373.0;
 
+  public double getAverageSpeed() {
+    return averageSpeed;
+  }
+
   public Duration calculateETA(float latitude, float longitude,
       float otherLatitude, float otherLongitude) {
     var distance = this.calculateDistance(latitude, longitude,

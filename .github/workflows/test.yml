@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+      - dev
 
 jobs:
   build:
@@ -15,7 +16,7 @@ jobs:
     strategy:
       matrix:
         java: [ 17 ]
-        os: [ubuntu, windows]
+        os: [ubuntu]
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
@@ -31,6 +32,13 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
       - name: Run Gradle's test task
         run: ./gradlew --no-daemon --parallel --continue --build-cache --stacktrace test
+      - name: Run Gradle's mutation testing task
+        run: ./gradlew pitest
+      - name: Deploy mutation testing reports
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/reports/pitest/
   auto-merge:
     needs: build
     runs-on: ubuntu-latest

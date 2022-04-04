@@ -99,4 +99,17 @@ public final class Delivery {
   public int hashCode() {
     return Objects.hash(id, contactEmail, latitude, longitude, timeOfDelivery, arrived, onTime);
   }
+
+    @Override
+    public String toString() {
+        return "Delivery{" +
+                "id=" + id +
+                ", contactEmail='" + contactEmail + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", timeOfDelivery=" + timeOfDelivery +
+                ", arrived=" + arrived +
+                ", onTime=" + onTime +
+                '}';
+    }
 }

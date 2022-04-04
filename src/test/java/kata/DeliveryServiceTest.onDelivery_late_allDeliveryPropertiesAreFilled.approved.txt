@@ -1,0 +1,1 @@
+[Delivery{id=123, contactEmail='test1@example.com', latitude=58.36619, longitude=26.73982, timeOfDelivery=2022-03-14T16:34, arrived=true, onTime=false}]
