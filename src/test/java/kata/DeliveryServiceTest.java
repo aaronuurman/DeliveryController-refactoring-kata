@@ -136,7 +136,7 @@ class DeliveryServiceTest {
 
         // Arrange
         verify(sendgridEmailGatewayMock).send(
-                schedule.get(0).getContactEmail(),
+                "test1@example.com",
                 "Your feedback is important to us",
                 "Regarding your delivery today at 2022-03-14 16:34. How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>"
         );
@@ -154,7 +154,7 @@ class DeliveryServiceTest {
 
         // Arrange
         verify(sendgridEmailGatewayMock).send(
-                schedule.get(1).getContactEmail(),
+                "test2@example.com",
                 "Your delivery will arrive soon",
                 "Your delivery to [57.840694,27.004316] is next, estimated time of arrival is in 10 minutes. Be ready!"
         );
@@ -172,7 +172,7 @@ class DeliveryServiceTest {
 
         // Arrange
         verify(sendgridEmailGatewayMock).send(
-                schedule.get(2).getContactEmail(),
+                "test3@example.com",
                 "Your delivery will arrive soon",
                 "Your delivery to [58.362286,25.58746] is next, estimated time of arrival is in 10 minutes. Be ready!"
         );
