@@ -32,6 +32,13 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
       - name: Run Gradle's test task
         run: ./gradlew --no-daemon --parallel --continue --build-cache --stacktrace test
+      - name: Run Gradle's mutation testing task
+        run: ./gradlew --no-daemon --parallel --continue --build-cache --stacktrace pitest
+      - name: Deploy mutation testing reports
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/reports/pitest/*/
   auto-merge:
     needs: build
     runs-on: ubuntu-latest
