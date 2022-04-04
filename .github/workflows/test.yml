@@ -37,12 +37,10 @@ jobs:
       - name: List files
         run: ls -la build/reports/pitest/
       - name: Deploy mutation testing reports
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: peaceiris/actions-gh-pages@v3.8
         with:
-          target_branch: gh-pages
-          build_dir: ./build/reports/pitest/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/reports/pitest/
   auto-merge:
     needs: build
     runs-on: ubuntu-latest
