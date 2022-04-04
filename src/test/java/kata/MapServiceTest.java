@@ -25,12 +25,11 @@ class MapServiceTest {
     }
 
     @Test
-    @Disabled("Potential bug in calculateETA when delivery is in same city, but different address")
     void calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery() {
         // Arrange & Act
         var sameCity = mapService.calculateETA(
                 TARTU_CENTER.getLatitude(),
-                TARTU_CENTER.getLatitude(),
+                TARTU_CENTER.getLongitude(),
                 TARTU_TURU_29B.getLatitude(),
                 TARTU_TURU_29B.getLongitude()
         );
