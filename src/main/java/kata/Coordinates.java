@@ -1,4 +1,4 @@
-package kata.factories;
+package kata;
 
 public class Coordinates {
 

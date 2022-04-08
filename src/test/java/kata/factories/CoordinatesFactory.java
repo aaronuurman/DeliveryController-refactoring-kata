@@ -1,5 +1,7 @@
 package kata.factories;
 
+import kata.Coordinates;
+
 public final class CoordinatesFactory {
 
     public static final Coordinates TARTU_CENTER = new Coordinates(58.377983f, 26.729038f);

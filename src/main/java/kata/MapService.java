@@ -4,6 +4,7 @@ import java.time.Duration;
 
 public class MapService {
 
+    // TODO: Figure out what is that?
     private final double R = 6373.0;
     // in km/h
     private double averageSpeed = 50.0;
@@ -12,8 +13,13 @@ public class MapService {
         return averageSpeed;
     }
 
-    public Duration calculateETA(float latitude, float longitude, float otherLatitude, float otherLongitude) {
-        var distance = this.calculateDistance(latitude, longitude, otherLatitude, otherLongitude);
+    public Duration calculateETA(Coordinates from, Coordinates to) {
+        var distance = this.calculateDistance(
+                from.getLatitude(),
+                from.getLongitude(),
+                to.getLatitude(),
+                to.getLongitude()
+        );
         Double v = distance / this.averageSpeed * Duration.ofHours(1).toMinutes();
         return Duration.ofMinutes(v.longValue());
     }

@@ -15,7 +15,7 @@ import static kata.factories.DeliveryFactory.createOnTimeScheduleWithTwoDeliveri
 import static kata.factories.DeliveryFactory.createScheduleWithSingleDelivery;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyFloat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -147,7 +147,7 @@ class DeliveryServiceTest {
         // Arrange
         var deliveryEvent = createDeliveryEvent();
         var schedule = createOnTimeScheduleWithTwoDeliveries(DELIVERY_TIME.plusMinutes(2));
-        when(mapServiceMock.calculateETA(anyFloat(), anyFloat(), anyFloat(), anyFloat())).thenReturn(Duration.ofMinutes(10));
+        when(mapServiceMock.calculateETA(any(), any())).thenReturn(Duration.ofMinutes(10));
 
         // Act
         deliveryService.on(deliveryEvent, schedule);
@@ -165,7 +165,7 @@ class DeliveryServiceTest {
         // Arrange
         var deliveryEvent = createDeliveryEvent(124);
         var schedule = createLateScheduleWithThreeDeliveries(DELIVERY_TIME.minusMinutes(15));
-        when(mapServiceMock.calculateETA(anyFloat(), anyFloat(), anyFloat(), anyFloat())).thenReturn(Duration.ofMinutes(10));
+        when(mapServiceMock.calculateETA(any(), any())).thenReturn(Duration.ofMinutes(10));
 
         // Act
         deliveryService.on(deliveryEvent, schedule);
@@ -183,7 +183,7 @@ class DeliveryServiceTest {
         // Arrange
         var deliveryEvent = createDeliveryEvent(124);
         var schedule = createLateScheduleWithThreeDeliveries(DELIVERY_TIME.minusMinutes(15));
-        when(mapServiceMock.calculateETA(anyFloat(), anyFloat(), anyFloat(), anyFloat())).thenReturn(Duration.ofMinutes(10));
+        when(mapServiceMock.calculateETA(any(), any())).thenReturn(Duration.ofMinutes(10));
 
         // Act
         deliveryService.on(deliveryEvent, schedule);
