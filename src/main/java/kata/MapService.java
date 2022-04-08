@@ -4,8 +4,6 @@ import java.time.Duration;
 
 public class MapService {
 
-    private final int MINUTES_PER_HOUR = 60;
-    private final int SECONDS_PER_HOUR = 3600;
     private final double R = 6373.0;
     // in km/h
     private double averageSpeed = 50.0;
@@ -16,13 +14,13 @@ public class MapService {
 
     public Duration calculateETA(float latitude, float longitude, float otherLatitude, float otherLongitude) {
         var distance = this.calculateDistance(latitude, longitude, otherLatitude, otherLongitude);
-        Double v = distance / this.averageSpeed * MINUTES_PER_HOUR;
+        Double v = distance / this.averageSpeed * Duration.ofHours(1).toMinutes();
         return Duration.ofMinutes(v.longValue());
     }
 
     public void updateAverageSpeed(Duration elapsedTime, float latitude, float longitude, float otherLatitude, float otherLongitude) {
         var distance = this.calculateDistance(latitude, longitude, otherLatitude, otherLongitude);
-        var updatedSpeed = distance / (elapsedTime.getSeconds() / (double) SECONDS_PER_HOUR);
+        var updatedSpeed = distance / (elapsedTime.getSeconds() / (double) Duration.ofHours(1).toSeconds());
         this.averageSpeed = updatedSpeed;
     }
 
