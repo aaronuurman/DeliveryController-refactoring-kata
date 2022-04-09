@@ -53,11 +53,7 @@ class MapServiceTest {
         assertEquals(50, mapService.getAverageSpeed());
 
         // Act
-        mapService.updateAverageSpeed(
-                elapsedTime,
-                new Coordinates(previousDelivery.getLatitude(), previousDelivery.getLongitude()),
-                new Coordinates(delivery.getLatitude(), delivery.getLongitude())
-        );
+        mapService.updateAverageSpeed(elapsedTime, previousDelivery.getCoordinates(), delivery.getCoordinates());
 
         // Assert
         assertEquals(54.16357790736967, mapService.getAverageSpeed());

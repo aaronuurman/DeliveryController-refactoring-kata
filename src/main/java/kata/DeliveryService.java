@@ -45,8 +45,8 @@ public class DeliveryService {
                     Duration elapsedTime = Duration.between(previousDelivery.getTimeOfDelivery(), delivery.getTimeOfDelivery());
                     mapService.updateAverageSpeed(
                             elapsedTime,
-                            new Coordinates(previousDelivery.getLatitude(), previousDelivery.getLongitude()),
-                            new Coordinates(delivery.getLatitude(), delivery.getLongitude())
+                            previousDelivery.getCoordinates(),
+                            delivery.getCoordinates()
                     );
                 }
             }
@@ -54,11 +54,11 @@ public class DeliveryService {
 
         if (nextDelivery != null) {
             var from = new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude());
-            var to = new Coordinates(nextDelivery.getLatitude(), nextDelivery.getLongitude());
+            var to = nextDelivery.getCoordinates();
             var nextEta = mapService.calculateETAInMinutes(from, to);
             var message = UPCOMING_DELIVERY_MESSAGE_TEMPLATE.formatted(
-                    nextDelivery.getLatitude(),
-                    nextDelivery.getLongitude(),
+                    nextDelivery.getCoordinates().latitude(),
+                    nextDelivery.getCoordinates().longitude(),
                     nextEta.getSeconds() / 60
             );
             emailGateway.send(nextDelivery.getContactEmail(), "Your delivery will arrive soon", message);

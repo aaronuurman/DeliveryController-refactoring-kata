@@ -7,8 +7,7 @@ public final class Delivery {
 
     private final Long id;
     private final String contactEmail;
-    private final float latitude;
-    private final float longitude;
+    private final Coordinates coordinates;
     private LocalDateTime timeOfDelivery;
     private boolean arrived;
     private boolean onTime;
@@ -16,16 +15,14 @@ public final class Delivery {
     public Delivery(
             Long id,
             String contactEmail,
-            float latitude,
-            float longitude,
+            Coordinates coordinates,
             LocalDateTime timeOfDelivery,
             boolean arrived,
             boolean onTime
     ) {
         this.id = id;
         this.contactEmail = contactEmail;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.coordinates = coordinates;
         this.timeOfDelivery = timeOfDelivery;
         this.arrived = arrived;
         this.onTime = onTime;
@@ -39,12 +36,8 @@ public final class Delivery {
         return contactEmail;
     }
 
-    public float getLatitude() {
-        return latitude;
-    }
-
-    public float getLongitude() {
-        return longitude;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
     public LocalDateTime getTimeOfDelivery() {
@@ -76,14 +69,17 @@ public final class Delivery {
             return false;
         }
         Delivery delivery = (Delivery) o;
-        return Float.compare(delivery.latitude, latitude) == 0 && Float.compare(delivery.longitude, longitude) == 0
-                && arrived == delivery.arrived && onTime == delivery.onTime && id.equals(delivery.id)
-                && contactEmail.equals(delivery.contactEmail) && timeOfDelivery.equals(delivery.timeOfDelivery);
+        return arrived == delivery.arrived
+                && onTime == delivery.onTime
+                && Objects.equals(id, delivery.id)
+                && Objects.equals(contactEmail, delivery.contactEmail)
+                && Objects.equals(coordinates, delivery.coordinates)
+                && Objects.equals(timeOfDelivery, delivery.timeOfDelivery);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, contactEmail, latitude, longitude, timeOfDelivery, arrived, onTime);
+        return Objects.hash(id, contactEmail, coordinates, timeOfDelivery, arrived, onTime);
     }
 
     @Override
@@ -91,8 +87,8 @@ public final class Delivery {
         return "Delivery{"
                 + "id=" + id +
                 ", contactEmail='" + contactEmail + '\''
-                + ", latitude=" + latitude
-                + ", longitude=" + longitude
+                + ", latitude=" + coordinates.latitude()
+                + ", longitude=" + coordinates.longitude()
                 + ", timeOfDelivery=" + timeOfDelivery
                 + ", arrived=" + arrived
                 + ", onTime=" + onTime
