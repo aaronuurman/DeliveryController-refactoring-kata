@@ -251,7 +251,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>    public Duration calculateETA(Coordinates from, Coordinates to) {</span></pre></td></tr>
+<td class=''><pre><span  class=''>    public Duration calculateETAInMinutes(Coordinates from, Coordinates to) {</span></pre></td></tr>
 
 
 <tr>
@@ -278,13 +278,13 @@
 <span class='pop'>
 <a href='#grouporg.pitest.mutationtest.report.html.SourceFile@10fde30a_18'>2</a>
 <span>
-1. calculateETA : Replaced double division with multiplication &rarr; SURVIVED<br/>
-2. calculateETA : Replaced double multiplication with division &rarr; KILLED<br/>
+1. calculateETAInMinutes : Replaced double division with multiplication &rarr; SURVIVED<br/>
+2. calculateETAInMinutes : Replaced double multiplication with division &rarr; KILLED<br/>
 
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class='survived'>        Double v = distance / averageSpeed * Duration.ofHours(1).toMinutes();</span></pre></td></tr>
+<td class='covered'><pre><span  class='survived'>        var timeInMinutes = distance / averageSpeed * Duration.ofHours(1).toMinutes();</span></pre></td></tr>
 
 
 <tr>
@@ -296,12 +296,12 @@
 <span class='pop'>
 <a href='#grouporg.pitest.mutationtest.report.html.SourceFile@10fde30a_19'>1</a>
 <span>
-1. calculateETA : replaced return value with null for kata/MapService::calculateETA &rarr; KILLED<br/>
+1. calculateETAInMinutes : replaced return value with null for kata/MapService::calculateETAInMinutes &rarr; KILLED<br/>
 
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class='killed'>        return Duration.ofMinutes(v.longValue());</span></pre></td></tr>
+<td class='covered'><pre><span  class='killed'>        return Duration.ofMinutes((long) timeInMinutes);</span></pre></td></tr>
 
 
 <tr>
@@ -664,7 +664,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@10fde30a_18'/> 
 
-<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateETA<br/><b>Killed by : </b>none</span></span> Replaced double division with multiplication &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateETA<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateETAInMinutes<br/><b>Killed by : </b>none</span></span> Replaced double division with multiplication &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateETAInMinutes<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -674,7 +674,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@10fde30a_19'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateETA<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()]</span></span> replaced return value with null for kata/MapService::calculateETA &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateETAInMinutes<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()]</span></span> replaced return value with null for kata/MapService::calculateETAInMinutes &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -684,7 +684,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@10fde30a_28'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -694,7 +694,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@10fde30a_29'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -714,7 +714,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@10fde30a_31'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -724,7 +724,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@10fde30a_32'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double addition with subtraction &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double addition with subtraction &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -734,7 +734,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@10fde30a_34'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()]</span></span> replaced double return with 0.0d for kata/MapService::calculateDistance &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>calculateDistance<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()]</span></span> replaced double return with 0.0d for kata/MapService::calculateDistance &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -769,7 +769,7 @@
 
 <h2>Tests examined</h2>
 <ul>
-<li>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()] (11 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_averageSpeedIsUpdated()] (12 ms)</li><li>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()] (3 ms)</li><li>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()] (11 ms)</li>
+<li>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery()] (13 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_averageSpeedIsUpdated()] (9 ms)</li><li>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance()] (14 ms)</li><li>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()] (12 ms)</li>
 </ul>
 
 <br/>
