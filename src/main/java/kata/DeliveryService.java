@@ -11,6 +11,8 @@ public class DeliveryService {
 
     public static final int ALLOWED_DELAY_IN_MINUTES = 10;
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final String RECOMMENDATION_MESSAGE_TEMPLATE = "Regarding your delivery today at %s. How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>";
+    private static final String UPCOMING_DELIVERY_MESSAGE_TEMPLATE = "Your delivery to [%s,%s] is next, estimated time of arrival is in %s minutes. Be ready!";
 
     private final SendgridEmailGateway emailGateway;
     private final MapService mapService;
@@ -32,8 +34,7 @@ public class DeliveryService {
                     delivery.setOnTime(true);
                 }
                 delivery.setTimeOfDelivery(deliveryEvent.timeOfDelivery());
-                String message = "Regarding your delivery today at %s. How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>"
-                        .formatted(DATE_TIME_FORMATTER.format(delivery.getTimeOfDelivery()));
+                String message = RECOMMENDATION_MESSAGE_TEMPLATE.formatted(DATE_TIME_FORMATTER.format(delivery.getTimeOfDelivery()));
                 emailGateway.send(delivery.getContactEmail(), "Your feedback is important to us", message);
                 if (deliverySchedule.size() > i + 1) {
                     nextDelivery = deliverySchedule.get(i + 1);
@@ -55,8 +56,11 @@ public class DeliveryService {
             var from = new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude());
             var to = new Coordinates(nextDelivery.getLatitude(), nextDelivery.getLongitude());
             var nextEta = mapService.calculateETAInMinutes(from, to);
-            var message = "Your delivery to [%s,%s] is next, estimated time of arrival is in %s minutes. Be ready!"
-                    .formatted(nextDelivery.getLatitude(), nextDelivery.getLongitude(), nextEta.getSeconds() / 60);
+            var message = UPCOMING_DELIVERY_MESSAGE_TEMPLATE.formatted(
+                    nextDelivery.getLatitude(),
+                    nextDelivery.getLongitude(),
+                    nextEta.getSeconds() / 60
+            );
             emailGateway.send(nextDelivery.getContactEmail(), "Your delivery will arrive soon", message);
         }
         return deliverySchedule;
