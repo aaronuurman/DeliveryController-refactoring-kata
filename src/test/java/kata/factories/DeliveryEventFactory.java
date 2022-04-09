@@ -15,10 +15,10 @@ public final class DeliveryEventFactory {
     public static final LocalDateTime DELIVERY_TIME = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
 
     public static DeliveryEvent createDeliveryEvent() {
-        return new DeliveryEvent(123L, DELIVERY_TIME, TARTU_TURU_29B.getLatitude(), TARTU_TURU_29B.getLongitude());
+        return new DeliveryEvent(123L, DELIVERY_TIME, TARTU_TURU_29B.latitude(), TARTU_TURU_29B.longitude());
     }
 
     public static DeliveryEvent createDeliveryEvent(long id) {
-        return new DeliveryEvent(id, DELIVERY_TIME, TARTU_TURU_29B.getLatitude(), TARTU_TURU_29B.getLongitude());
+        return new DeliveryEvent(id, DELIVERY_TIME, TARTU_TURU_29B.latitude(), TARTU_TURU_29B.longitude());
     }
 }

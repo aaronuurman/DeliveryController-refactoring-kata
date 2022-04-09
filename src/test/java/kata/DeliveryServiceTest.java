@@ -189,13 +189,9 @@ class DeliveryServiceTest {
         deliveryService.on(deliveryEvent, schedule);
 
         // Assert
-        verify(mapServiceMock, times(1)).updateAverageSpeed(
-                Duration.ofMinutes(147),
-                deliveryEvent.latitude(),
-                deliveryEvent.longitude(),
-                VORU_LEPA_2.getLatitude(),
-                VORU_LEPA_2.getLongitude()
-        );
+        verify(mapServiceMock, times(1)).updateAverageSpeed(Duration.ofMinutes(147),
+                                                            new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude()),
+                                                            VORU_LEPA_2);
     }
 
     // TODO: Create test case, where delivery is early with next scheduled delivery. Validate that also then. mapService.updateAverageSpeed() is called.

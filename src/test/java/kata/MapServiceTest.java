@@ -55,10 +55,8 @@ class MapServiceTest {
         // Act
         mapService.updateAverageSpeed(
                 elapsedTime,
-                previousDelivery.getLatitude(),
-                previousDelivery.getLongitude(),
-                delivery.getLatitude(),
-                delivery.getLongitude()
+                new Coordinates(previousDelivery.getLatitude(), previousDelivery.getLongitude()),
+                new Coordinates(delivery.getLatitude(), delivery.getLongitude())
         );
 
         // Assert

@@ -44,10 +44,8 @@ public class DeliveryService {
                     Duration elapsedTime = Duration.between(previousDelivery.getTimeOfDelivery(), delivery.getTimeOfDelivery());
                     mapService.updateAverageSpeed(
                             elapsedTime,
-                            previousDelivery.getLatitude(),
-                            previousDelivery.getLongitude(),
-                            delivery.getLatitude(),
-                            delivery.getLongitude()
+                            new Coordinates(previousDelivery.getLatitude(), previousDelivery.getLongitude()),
+                            new Coordinates(delivery.getLatitude(), delivery.getLongitude())
                     );
                 }
             }

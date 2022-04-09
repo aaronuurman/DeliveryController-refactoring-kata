@@ -18,8 +18,8 @@ public final class DeliveryFactory {
         return new Delivery(
                 123L,
                 "test1@example.com",
-                TARTU_TURU_29B.getLatitude(),
-                TARTU_TURU_29B.getLongitude(),
+                TARTU_TURU_29B.latitude(),
+                TARTU_TURU_29B.longitude(),
                 deliveryTime,
                 false,
                 false
@@ -36,8 +36,8 @@ public final class DeliveryFactory {
                 new Delivery(
                         124L,
                         "test2@example.com",
-                        VORU_LEPA_2.getLatitude(),
-                        VORU_LEPA_2.getLongitude(),
+                        VORU_LEPA_2.latitude(),
+                        VORU_LEPA_2.longitude(),
                         deliveryTime.plusMinutes(8),
                         false,
                         false
@@ -54,8 +54,8 @@ public final class DeliveryFactory {
                 new Delivery(
                         124L,
                         "test2@example.com",
-                        VORU_LEPA_2.getLatitude(),
-                        VORU_LEPA_2.getLongitude(),
+                        VORU_LEPA_2.latitude(),
+                        VORU_LEPA_2.longitude(),
                         deliveryTime.minusMinutes(65),
                         false,
                         false
@@ -63,8 +63,8 @@ public final class DeliveryFactory {
                 new Delivery(
                         125L,
                         "test3@example.com",
-                        VILJANDI_VAKSALI_7.getLatitude(),
-                        VILJANDI_VAKSALI_7.getLongitude(),
+                        VILJANDI_VAKSALI_7.latitude(),
+                        VILJANDI_VAKSALI_7.longitude(),
                         deliveryTime,
                         false,
                         false
