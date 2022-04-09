@@ -9,20 +9,19 @@ public class MapService {
     // in km/h
     private double averageSpeed = 50.0;
 
-    public double getAverageSpeed() {
+    protected double getAverageSpeed() {
         return averageSpeed;
     }
 
     public Duration calculateETA(Coordinates from, Coordinates to) {
-        var distance = this.calculateDistance(from, to);
-        Double v = distance / this.averageSpeed * Duration.ofHours(1).toMinutes();
+        var distance = calculateDistance(from, to);
+        Double v = distance / averageSpeed * Duration.ofHours(1).toMinutes();
         return Duration.ofMinutes(v.longValue());
     }
 
     public void updateAverageSpeed(Duration elapsedTime, Coordinates from, Coordinates to) {
-        var distance = this.calculateDistance(from, to);
-        var updatedSpeed = distance / (elapsedTime.getSeconds() / (double) Duration.ofHours(1).toSeconds());
-        this.averageSpeed = updatedSpeed;
+        var distance = calculateDistance(from, to);
+        averageSpeed = calculateAverageSpeed(elapsedTime, distance);
     }
 
     private double calculateDistance(Coordinates from, Coordinates to) {
@@ -33,5 +32,9 @@ public class MapService {
         var d3 = Math.pow(Math.sin((d2 - d1) / 2.0), 2.0) + Math.cos(d1) * Math.cos(d2) * Math.pow(Math.sin(num2 / 2.0), 2.0);
 
         return R * (2.0 * Math.atan2(Math.sqrt(d3), Math.sqrt(1.0 - d3)));
+    }
+
+    private static double calculateAverageSpeed(Duration elapsedTime, double distance) {
+        return distance / (elapsedTime.getSeconds() / (double) Duration.ofHours(1).toSeconds());
     }
 }
