@@ -21,7 +21,7 @@ public class NotificationService {
         var message = UPCOMING_DELIVERY_MESSAGE_TEMPLATE.formatted(
                 delivery.getCoordinates().latitude(),
                 delivery.getCoordinates().longitude(),
-                eta.getSeconds() / 60
+                eta.toMinutes()
         );
         emailGateway.send(delivery.getContactEmail(), subject, message);
     }

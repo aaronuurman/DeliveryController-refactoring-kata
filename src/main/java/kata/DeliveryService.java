@@ -6,17 +6,9 @@ import java.util.List;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class DeliveryService {
+public record DeliveryService(NotificationService notificationService, MapService mapService) {
 
     public static final int ALLOWED_DELAY_IN_MINUTES = 10;
-
-    private final NotificationService notificationService;
-    private final MapService mapService;
-
-    public DeliveryService(NotificationService notificationService, MapService mapService) {
-        this.notificationService = notificationService;
-        this.mapService = mapService;
-    }
 
     public List<Delivery> on(DeliveryEvent deliveryEvent, List<Delivery> deliverySchedule) {
         Delivery nextDelivery = null;
