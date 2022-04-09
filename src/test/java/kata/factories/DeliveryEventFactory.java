@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import kata.DeliveryEvent;
 
-import static kata.DeliveryService.DATE_TIME_FORMATTER;
+import static kata.NotificationService.DATE_TIME_FORMATTER;
 import static kata.factories.CoordinatesFactory.TARTU_TURU_29B;
 
 public final class DeliveryEventFactory {

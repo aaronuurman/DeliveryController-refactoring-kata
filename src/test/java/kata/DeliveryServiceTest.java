@@ -31,7 +31,8 @@ class DeliveryServiceTest {
     void setup() {
         mapServiceMock = mock(MapService.class);
         sendgridEmailGatewayMock = mock(SendgridEmailGateway.class);
-        deliveryService = new DeliveryService(sendgridEmailGatewayMock, mapServiceMock);
+        var notificationService = new NotificationService(sendgridEmailGatewayMock);
+        deliveryService = new DeliveryService(notificationService, mapServiceMock);
     }
 
     @Test
