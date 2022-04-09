@@ -13,10 +13,10 @@ public class MapService {
         return averageSpeed;
     }
 
-    public Duration calculateETA(Coordinates from, Coordinates to) {
+    public Duration calculateETAInMinutes(Coordinates from, Coordinates to) {
         var distance = calculateDistance(from, to);
-        Double v = distance / averageSpeed * Duration.ofHours(1).toMinutes();
-        return Duration.ofMinutes(v.longValue());
+        var timeInMinutes = distance / averageSpeed * Duration.ofHours(1).toMinutes();
+        return Duration.ofMinutes((long) timeInMinutes);
     }
 
     public void updateAverageSpeed(Duration elapsedTime, Coordinates from, Coordinates to) {

@@ -26,8 +26,8 @@ class MapServiceTest {
     @Test
     void calculateETA_averageSpeed50_sameCityDeliveryTakesLessTimeThanDifferentCityDelivery() {
         // Arrange & Act
-        var sameCity = mapService.calculateETA(TARTU_CENTER, TARTU_TURU_29B);
-        var differentCity = mapService.calculateETA(TARTU_CENTER, TALLINN_CENTER);
+        var sameCity = mapService.calculateETAInMinutes(TARTU_CENTER, TARTU_TURU_29B);
+        var differentCity = mapService.calculateETAInMinutes(TARTU_CENTER, TALLINN_CENTER);
 
         // Assert
         assertTrue(sameCity.getSeconds() < differentCity.getSeconds());
@@ -36,8 +36,8 @@ class MapServiceTest {
     @Test
     void calculateETA_averageSpeed50_differentCityShortDistanceTakesLessTimeThanDifferentCityLongDistance() {
         // Arrange & Act
-        var differentCityShortDistance = mapService.calculateETA(TARTU_CENTER, VILJANDI_CENTER);
-        var differentCityLongDistance = mapService.calculateETA(TARTU_CENTER, TALLINN_CENTER);
+        var differentCityShortDistance = mapService.calculateETAInMinutes(TARTU_CENTER, VILJANDI_CENTER);
+        var differentCityLongDistance = mapService.calculateETAInMinutes(TARTU_CENTER, TALLINN_CENTER);
 
         // Assert
         assertTrue(differentCityShortDistance.getSeconds() < differentCityLongDistance.getSeconds());

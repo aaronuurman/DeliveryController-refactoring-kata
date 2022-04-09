@@ -147,7 +147,7 @@ class DeliveryServiceTest {
         // Arrange
         var deliveryEvent = createDeliveryEvent();
         var schedule = createOnTimeScheduleWithTwoDeliveries(DELIVERY_TIME.plusMinutes(2));
-        when(mapServiceMock.calculateETA(any(), any())).thenReturn(Duration.ofMinutes(10));
+        when(mapServiceMock.calculateETAInMinutes(any(), any())).thenReturn(Duration.ofMinutes(10));
 
         // Act
         deliveryService.on(deliveryEvent, schedule);
@@ -165,7 +165,7 @@ class DeliveryServiceTest {
         // Arrange
         var deliveryEvent = createDeliveryEvent(124);
         var schedule = createLateScheduleWithThreeDeliveries(DELIVERY_TIME.minusMinutes(15));
-        when(mapServiceMock.calculateETA(any(), any())).thenReturn(Duration.ofMinutes(10));
+        when(mapServiceMock.calculateETAInMinutes(any(), any())).thenReturn(Duration.ofMinutes(10));
 
         // Act
         deliveryService.on(deliveryEvent, schedule);
@@ -183,7 +183,7 @@ class DeliveryServiceTest {
         // Arrange
         var deliveryEvent = createDeliveryEvent(124);
         var schedule = createLateScheduleWithThreeDeliveries(DELIVERY_TIME.minusMinutes(15));
-        when(mapServiceMock.calculateETA(any(), any())).thenReturn(Duration.ofMinutes(10));
+        when(mapServiceMock.calculateETAInMinutes(any(), any())).thenReturn(Duration.ofMinutes(10));
 
         // Act
         deliveryService.on(deliveryEvent, schedule);

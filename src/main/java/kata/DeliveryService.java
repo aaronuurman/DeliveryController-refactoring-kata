@@ -54,7 +54,7 @@ public class DeliveryService {
         if (nextDelivery != null) {
             var from = new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude());
             var to = new Coordinates(nextDelivery.getLatitude(), nextDelivery.getLongitude());
-            var nextEta = mapService.calculateETA(from, to);
+            var nextEta = mapService.calculateETAInMinutes(from, to);
             var message = "Your delivery to [%s,%s] is next, estimated time of arrival is in %s minutes. Be ready!"
                     .formatted(nextDelivery.getLatitude(), nextDelivery.getLongitude(), nextEta.getSeconds() / 60);
             emailGateway.send(nextDelivery.getContactEmail(), "Your delivery will arrive soon", message);
