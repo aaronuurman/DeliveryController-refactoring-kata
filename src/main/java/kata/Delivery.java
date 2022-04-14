@@ -49,6 +49,15 @@ public final class Delivery {
         return onTime;
     }
 
+    public void update(DeliveryEvent deliveryEvent) {
+        Duration duration = Duration.between(getTimeOfDelivery(), deliveryEvent.timeOfDelivery());
+        if (duration.toMinutes() < DeliveryService.ALLOWED_DELAY_IN_MINUTES) {
+            this.onTime = true;
+        }
+        this.arrived = true;
+        this.timeOfDelivery = deliveryEvent.timeOfDelivery();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -82,14 +91,5 @@ public final class Delivery {
                 + ", arrived=" + arrived
                 + ", onTime=" + onTime
                 + '}';
-    }
-
-    public void update(DeliveryEvent deliveryEvent) {
-        Duration duration = Duration.between(getTimeOfDelivery(), deliveryEvent.timeOfDelivery());
-        if (duration.toMinutes() < DeliveryService.ALLOWED_DELAY_IN_MINUTES) {
-            this.onTime = true;
-        }
-        this.arrived = true;
-        this.timeOfDelivery = deliveryEvent.timeOfDelivery();
     }
 }
