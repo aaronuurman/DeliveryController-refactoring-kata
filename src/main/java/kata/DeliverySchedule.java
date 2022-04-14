@@ -23,12 +23,16 @@ public class DeliverySchedule {
         throw new IllegalStateException();
     }
 
-    public boolean weHaveMultipleDeliveriesAndCurrentDeliveryIsNotTheFirstOne() {
+    public boolean doWeHavePreviousDelivery() {
         return deliveryList.size() > 1 && index > 0;
     }
 
-    public Delivery getPreviousDelivery() {
-        return deliveryList.get(index - 1);
+    public Optional<Delivery> getPreviousDelivery() {
+        if (doWeHavePreviousDelivery()) {
+            return Optional.of(deliveryList.get(index - 1));
+        } else {
+            return Optional.empty();
+        }
     }
 
     public Optional<Delivery> findNextDelivery() {

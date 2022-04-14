@@ -17,18 +17,20 @@ public record DeliveryService(NotificationService notificationService, MapServic
 
         notificationService.recommendToFriend(currentDelivery);
 
-        if (!currentDelivery.isOnTime() && deliverySchedule2.weHaveMultipleDeliveriesAndCurrentDeliveryIsNotTheFirstOne()) {
-            var previousDelivery = deliverySchedule2.getPreviousDelivery();
-            Duration elapsedTime = Duration.between(previousDelivery.getTimeOfDelivery(), currentDelivery.getTimeOfDelivery());
+        deliverySchedule2.getPreviousDelivery().ifPresent(delivery -> maybeUpdateAverageSpeed(currentDelivery, delivery));
+        deliverySchedule2.findNextDelivery().ifPresent(delivery -> informNextDeliveryRecipientAboutNewEta(deliveryEvent, delivery));
+        return deliverySchedule;
+    }
+
+    private void maybeUpdateAverageSpeed(Delivery currentDelivery, Delivery delivery) {
+        if (!currentDelivery.isOnTime()) {
+            Duration elapsedTime = Duration.between(delivery.getTimeOfDelivery(), currentDelivery.getTimeOfDelivery());
             mapService.updateAverageSpeed(
                     elapsedTime,
-                    previousDelivery.getCoordinates(),
+                    delivery.getCoordinates(),
                     currentDelivery.getCoordinates()
             );
         }
-
-        deliverySchedule2.findNextDelivery().ifPresent(delivery -> informNextDeliveryRecipientAboutNewEta(deliveryEvent, delivery));
-        return deliverySchedule;
     }
 
     private void informNextDeliveryRecipientAboutNewEta(DeliveryEvent deliveryEvent, Delivery delivery) {
