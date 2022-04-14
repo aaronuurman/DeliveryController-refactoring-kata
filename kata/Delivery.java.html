@@ -800,11 +800,11 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+<td class=''><pre><span  class=''>    public void update(DeliveryEvent deliveryEvent) {</span></pre></td></tr>
 
 
 <tr>
-<td class='na'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_53'/>
 53
 </td>
@@ -815,41 +815,40 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>    public boolean equals(Object o) {</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>        Duration duration = Duration.between(getTimeOfDelivery(), deliveryEvent.timeOfDelivery());</span></pre></td></tr>
 
 
 <tr>
-<td class='uncovered'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_54'/>
 54
 </td>
-<td class='survived'>
+<td class='killed'>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_54'>1</a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_54'>2</a>
 <span>
-1. equals : negated conditional &rarr; NO_COVERAGE<br/>
+1. update : changed conditional boundary &rarr; KILLED<br/>
+2. update : negated conditional &rarr; KILLED<br/>
 
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>        if (this == o) {</span></pre></td></tr>
+<td class='covered'><pre><span  class='killed'>        if (duration.toMinutes() &#60; DeliveryService.ALLOWED_DELAY_IN_MINUTES) {</span></pre></td></tr>
 
 
 <tr>
-<td class='uncovered'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_55'/>
 55
 </td>
-<td class='survived'>
+<td class=''>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_55'>1</a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_55'></a>
 <span>
-1. equals : replaced boolean return with false for kata/Delivery::equals &rarr; NO_COVERAGE<br/>
-
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>            return true;</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>            this.onTime = true;</span></pre></td></tr>
 
 
 <tr>
@@ -868,42 +867,37 @@
 
 
 <tr>
-<td class='uncovered'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_57'/>
 57
 </td>
-<td class='survived'>
+<td class=''>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_57'>2</a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_57'></a>
 <span>
-1. equals : negated conditional &rarr; NO_COVERAGE<br/>
-2. equals : negated conditional &rarr; NO_COVERAGE<br/>
-
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>        if (o == null || getClass() != o.getClass()) {</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>        this.arrived = true;</span></pre></td></tr>
 
 
 <tr>
-<td class='uncovered'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_58'/>
 58
 </td>
-<td class='survived'>
+<td class=''>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_58'>1</a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_58'></a>
 <span>
-1. equals : replaced boolean return with true for kata/Delivery::equals &rarr; NO_COVERAGE<br/>
-
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>            return false;</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>        this.timeOfDelivery = deliveryEvent.timeOfDelivery();</span></pre></td></tr>
 
 
 <tr>
-<td class='na'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_59'/>
 59
 </td>
@@ -914,11 +908,11 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
 
 
 <tr>
-<td class='uncovered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_60'/>
 60
 </td>
@@ -929,26 +923,22 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class=''>        Delivery delivery = (Delivery) o;</span></pre></td></tr>
+<td class=''><pre><span  class=''></span></pre></td></tr>
 
 
 <tr>
-<td class='uncovered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_61'/>
 61
 </td>
-<td class='survived'>
+<td class=''>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_61'>3</a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_61'></a>
 <span>
-1. equals : negated conditional &rarr; NO_COVERAGE<br/>
-2. equals : negated conditional &rarr; NO_COVERAGE<br/>
-3. equals : replaced boolean return with true for kata/Delivery::equals &rarr; NO_COVERAGE<br/>
-
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>        return arrived == delivery.arrived</span></pre></td></tr>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
 
 
 <tr>
@@ -963,7 +953,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>                &#38;&#38; onTime == delivery.onTime</span></pre></td></tr>
+<td class=''><pre><span  class=''>    public boolean equals(Object o) {</span></pre></td></tr>
 
 
 <tr>
@@ -980,7 +970,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                &#38;&#38; Objects.equals(id, delivery.id)</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>        if (this == o) {</span></pre></td></tr>
 
 
 <tr>
@@ -992,29 +982,27 @@
 <span class='pop'>
 <a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_64'>1</a>
 <span>
-1. equals : negated conditional &rarr; NO_COVERAGE<br/>
+1. equals : replaced boolean return with false for kata/Delivery::equals &rarr; NO_COVERAGE<br/>
 
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                &#38;&#38; Objects.equals(contactEmail, delivery.contactEmail)</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>            return true;</span></pre></td></tr>
 
 
 <tr>
-<td class='uncovered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_65'/>
 65
 </td>
-<td class='survived'>
+<td class=''>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_65'>1</a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_65'></a>
 <span>
-1. equals : negated conditional &rarr; NO_COVERAGE<br/>
-
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                &#38;&#38; Objects.equals(coordinates, delivery.coordinates)</span></pre></td></tr>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
 
 
 <tr>
@@ -1024,29 +1012,32 @@
 </td>
 <td class='survived'>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_66'>1</a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_66'>2</a>
 <span>
 1. equals : negated conditional &rarr; NO_COVERAGE<br/>
+2. equals : negated conditional &rarr; NO_COVERAGE<br/>
 
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                &#38;&#38; Objects.equals(timeOfDelivery, delivery.timeOfDelivery);</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>        if (o == null || getClass() != o.getClass()) {</span></pre></td></tr>
 
 
 <tr>
-<td class='na'>
+<td class='uncovered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_67'/>
 67
 </td>
-<td class=''>
+<td class='survived'>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_67'></a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_67'>1</a>
 <span>
+1. equals : replaced boolean return with true for kata/Delivery::equals &rarr; NO_COVERAGE<br/>
+
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>            return false;</span></pre></td></tr>
 
 
 <tr>
@@ -1061,11 +1052,11 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''></span></pre></td></tr>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
 
 
 <tr>
-<td class='na'>
+<td class='uncovered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_69'/>
 69
 </td>
@@ -1076,116 +1067,124 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
-
-
-<tr>
-<td class='na'>
-<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_70'/>
-70
-</td>
-<td class=''>
-<span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_70'></a>
-<span>
-</span>
-</span>
-</td>
-<td class=''><pre><span  class=''>    public int hashCode() {</span></pre></td></tr>
+<td class='uncovered'><pre><span  class=''>        Delivery delivery = (Delivery) o;</span></pre></td></tr>
 
 
 <tr>
 <td class='uncovered'>
-<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_71'/>
-71
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_70'/>
+70
 </td>
 <td class='survived'>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_71'>1</a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_70'>3</a>
 <span>
-1. hashCode : replaced int return with 0 for kata/Delivery::hashCode &rarr; NO_COVERAGE<br/>
+1. equals : negated conditional &rarr; NO_COVERAGE<br/>
+2. equals : negated conditional &rarr; NO_COVERAGE<br/>
+3. equals : replaced boolean return with true for kata/Delivery::equals &rarr; NO_COVERAGE<br/>
 
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>        return Objects.hash(id, contactEmail, coordinates, timeOfDelivery, arrived, onTime);</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>        return arrived == delivery.arrived</span></pre></td></tr>
 
 
 <tr>
 <td class='na'>
-<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_72'/>
-72
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_71'/>
+71
 </td>
 <td class=''>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_72'></a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                &#38;&#38; onTime == delivery.onTime</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_72'/>
+72
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_72'>1</a>
+<span>
+1. equals : negated conditional &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                &#38;&#38; Objects.equals(id, delivery.id)</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_73'/>
+73
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_73'>1</a>
+<span>
+1. equals : negated conditional &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                &#38;&#38; Objects.equals(contactEmail, delivery.contactEmail)</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_74'/>
+74
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_74'>1</a>
+<span>
+1. equals : negated conditional &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                &#38;&#38; Objects.equals(coordinates, delivery.coordinates)</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_75'/>
+75
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_75'>1</a>
+<span>
+1. equals : negated conditional &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                &#38;&#38; Objects.equals(timeOfDelivery, delivery.timeOfDelivery);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_76'></a>
 <span>
 </span>
 </span>
 </td>
 <td class=''><pre><span  class=''>    }</span></pre></td></tr>
-
-
-<tr>
-<td class='na'>
-<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_73'/>
-73
-</td>
-<td class=''>
-<span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_73'></a>
-<span>
-</span>
-</span>
-</td>
-<td class=''><pre><span  class=''></span></pre></td></tr>
-
-
-<tr>
-<td class='na'>
-<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_74'/>
-74
-</td>
-<td class=''>
-<span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_74'></a>
-<span>
-</span>
-</span>
-</td>
-<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
-
-
-<tr>
-<td class='na'>
-<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_75'/>
-75
-</td>
-<td class=''>
-<span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_75'></a>
-<span>
-</span>
-</span>
-</td>
-<td class=''><pre><span  class=''>    public String toString() {</span></pre></td></tr>
-
-
-<tr>
-<td class='covered'>
-<a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_76'/>
-76
-</td>
-<td class='killed'>
-<span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_76'>1</a>
-<span>
-1. toString : replaced return value with &#34;&#34; for kata/Delivery::toString &rarr; KILLED<br/>
-
-</span>
-</span>
-</td>
-<td class='covered'><pre><span  class='killed'>        return &#34;Delivery{&#34;</span></pre></td></tr>
 
 
 <tr>
@@ -1200,7 +1199,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>                + &#34;id=&#34; + id +</span></pre></td></tr>
+<td class=''><pre><span  class=''></span></pre></td></tr>
 
 
 <tr>
@@ -1215,11 +1214,11 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>                &#34;, contactEmail=&#39;&#34; + contactEmail + &#39;\&#39;&#39;</span></pre></td></tr>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
 
 
 <tr>
-<td class='covered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_79'/>
 79
 </td>
@@ -1230,22 +1229,24 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>                + &#34;, latitude=&#34; + coordinates.latitude()</span></pre></td></tr>
+<td class=''><pre><span  class=''>    public int hashCode() {</span></pre></td></tr>
 
 
 <tr>
-<td class='covered'>
+<td class='uncovered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_80'/>
 80
 </td>
-<td class=''>
+<td class='survived'>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_80'></a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_80'>1</a>
 <span>
+1. hashCode : replaced int return with 0 for kata/Delivery::hashCode &rarr; NO_COVERAGE<br/>
+
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>                + &#34;, longitude=&#34; + coordinates.longitude()</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>        return Objects.hash(id, contactEmail, coordinates, timeOfDelivery, arrived, onTime);</span></pre></td></tr>
 
 
 <tr>
@@ -1260,7 +1261,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>                + &#34;, timeOfDelivery=&#34; + timeOfDelivery</span></pre></td></tr>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
 
 
 <tr>
@@ -1275,7 +1276,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>                + &#34;, arrived=&#34; + arrived</span></pre></td></tr>
+<td class=''><pre><span  class=''></span></pre></td></tr>
 
 
 <tr>
@@ -1290,7 +1291,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>                + &#34;, onTime=&#34; + onTime</span></pre></td></tr>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
 
 
 <tr>
@@ -1305,22 +1306,24 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>                + &#39;}&#39;;</span></pre></td></tr>
+<td class=''><pre><span  class=''>    public String toString() {</span></pre></td></tr>
 
 
 <tr>
-<td class='na'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_85'/>
 85
 </td>
-<td class=''>
+<td class='killed'>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_85'></a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_85'>1</a>
 <span>
+1. toString : replaced return value with &#34;&#34; for kata/Delivery::toString &rarr; KILLED<br/>
+
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+<td class='covered'><pre><span  class='killed'>        return &#34;Delivery{&#34;</span></pre></td></tr>
 
 
 <tr>
@@ -1335,7 +1338,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''></span></pre></td></tr>
+<td class=''><pre><span  class=''>                + &#34;id=&#34; + id +</span></pre></td></tr>
 
 
 <tr>
@@ -1350,7 +1353,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>    public void update(DeliveryEvent deliveryEvent) {</span></pre></td></tr>
+<td class=''><pre><span  class=''>                &#34;, contactEmail=&#39;&#34; + contactEmail + &#39;\&#39;&#39;</span></pre></td></tr>
 
 
 <tr>
@@ -1365,7 +1368,7 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>        Duration duration = Duration.between(getTimeOfDelivery(), deliveryEvent.timeOfDelivery());</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>                + &#34;, latitude=&#34; + coordinates.latitude()</span></pre></td></tr>
 
 
 <tr>
@@ -1373,21 +1376,18 @@
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_89'/>
 89
 </td>
-<td class='killed'>
+<td class=''>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_89'>2</a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_89'></a>
 <span>
-1. update : changed conditional boundary &rarr; KILLED<br/>
-2. update : negated conditional &rarr; KILLED<br/>
-
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class='killed'>        if (duration.toMinutes() &#60; DeliveryService.ALLOWED_DELAY_IN_MINUTES) {</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>                + &#34;, longitude=&#34; + coordinates.longitude()</span></pre></td></tr>
 
 
 <tr>
-<td class='covered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_90'/>
 90
 </td>
@@ -1398,7 +1398,7 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>            this.onTime = true;</span></pre></td></tr>
+<td class=''><pre><span  class=''>                + &#34;, timeOfDelivery=&#34; + timeOfDelivery</span></pre></td></tr>
 
 
 <tr>
@@ -1413,11 +1413,11 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+<td class=''><pre><span  class=''>                + &#34;, arrived=&#34; + arrived</span></pre></td></tr>
 
 
 <tr>
-<td class='covered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_92'/>
 92
 </td>
@@ -1428,11 +1428,11 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>        this.arrived = true;</span></pre></td></tr>
+<td class=''><pre><span  class=''>                + &#34;, onTime=&#34; + onTime</span></pre></td></tr>
 
 
 <tr>
-<td class='covered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_93'/>
 93
 </td>
@@ -1443,11 +1443,11 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>        this.timeOfDelivery = deliveryEvent.timeOfDelivery();</span></pre></td></tr>
+<td class=''><pre><span  class=''>                + &#39;}&#39;;</span></pre></td></tr>
 
 
 <tr>
-<td class='covered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@6ca0256d_94'/>
 94
 </td>
@@ -1458,7 +1458,7 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
 
 
 <tr>
@@ -1496,7 +1496,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_37'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getContactEmail<br/><b>Killed by : </b>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_recommendationEmailSent()]</span></span> replaced return value with &#34;&#34; for kata/Delivery::getContactEmail &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getContactEmail<br/><b>Killed by : </b>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_multipleDeliveriesLate_newAverageSpeed()]</span></span> replaced return value with &#34;&#34; for kata/Delivery::getContactEmail &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -1516,7 +1516,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_45'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getTimeOfDelivery<br/><b>Killed by : </b>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()]</span></span> replaced return value with null for kata/Delivery::getTimeOfDelivery &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getTimeOfDelivery<br/><b>Killed by : </b>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_exactlyOnTime_onTimeTrue()]</span></span> replaced return value with null for kata/Delivery::getTimeOfDelivery &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -1536,47 +1536,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_54'/> 
 
-<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> 
-</td>
-</tr>
-<tr>
-<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_55'>55</a></td> 
-<td></td>
-<td>
-
-<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_55'/> 
-
-<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> replaced boolean return with false for kata/Delivery::equals &rarr; NO_COVERAGE</p> 
-</td>
-</tr>
-<tr>
-<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_57'>57</a></td> 
-<td></td>
-<td>
-
-<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_57'/> 
-
-<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> 
-</td>
-</tr>
-<tr>
-<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_58'>58</a></td> 
-<td></td>
-<td>
-
-<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_58'/> 
-
-<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> replaced boolean return with true for kata/Delivery::equals &rarr; NO_COVERAGE</p> 
-</td>
-</tr>
-<tr>
-<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_61'>61</a></td> 
-<td></td>
-<td>
-
-<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_61'/> 
-
-<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> replaced boolean return with true for kata/Delivery::equals &rarr; NO_COVERAGE</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>update<br/><b>Killed by : </b>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_exactlyOnAllowedDelay_onTimeFalse()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>update<br/><b>Killed by : </b>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_exactlyOnTime_onTimeTrue()]</span></span> negated conditional &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -1596,17 +1556,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_64'/> 
 
-<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> 
-</td>
-</tr>
-<tr>
-<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_65'>65</a></td> 
-<td></td>
-<td>
-
-<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_65'/> 
-
-<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> 
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> replaced boolean return with false for kata/Delivery::equals &rarr; NO_COVERAGE</p> 
 </td>
 </tr>
 <tr>
@@ -1616,37 +1566,87 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_66'/> 
 
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_67'>67</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_67'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> replaced boolean return with true for kata/Delivery::equals &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_70'>70</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_70'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> replaced boolean return with true for kata/Delivery::equals &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_72'>72</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_72'/> 
+
 <p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> 
 </td>
 </tr>
 <tr>
-<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_71'>71</a></td> 
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_73'>73</a></td> 
 <td></td>
 <td>
 
-<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_71'/> 
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_73'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_74'>74</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_74'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_75'>75</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_75'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_80'>80</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_80'/> 
 
 <p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hashCode<br/><b>Killed by : </b>none</span></span> replaced int return with 0 for kata/Delivery::hashCode &rarr; NO_COVERAGE</p> 
 </td>
 </tr>
 <tr>
-<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_76'>76</a></td> 
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_85'>85</a></td> 
 <td></td>
 <td>
 
-<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_76'/> 
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_85'/> 
 
 <p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>toString<br/><b>Killed by : </b>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_late_allDeliveryPropertiesAreFilled()]</span></span> replaced return value with &#34;&#34; for kata/Delivery::toString &rarr; KILLED</p> 
-</td>
-</tr>
-<tr>
-<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ca0256d_89'>89</a></td> 
-<td></td>
-<td>
-
-<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ca0256d_89'/> 
-
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>update<br/><b>Killed by : </b>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_exactlyOnAllowedDelay_onTimeFalse()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>update<br/><b>Killed by : </b>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_exactlyOnAllowedDelay_onTimeFalse()]</span></span> negated conditional &rarr; KILLED</p> 
 </td>
 </tr>
 
@@ -1671,7 +1671,7 @@
 
 <h2>Tests examined</h2>
 <ul>
-<li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_recommendationEmailSent()] (9 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_late_allDeliveryPropertiesAreFilled()] (28 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_whenNextScheduled_upcomingDeliveryEmailSent()] (7 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_multipleDeliveriesLate_newAverageSpeed()] (10 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_secondOverAllowedDelay_onTimeFalse()] (14 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_twoMinutesLate_onTimeTrue()] (8 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_averageSpeedIsUpdated()] (13 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_exactlyOnAllowedDelay_onTimeFalse()] (6 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_exactlyOnTime_onTimeTrue()] (8 ms)</li><li>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()] (5 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_secondBeforeAllowedDelay_onTimeTrue()] (12 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_withInAllowedTime_allDeliveryPropertiesAreFilled()] (47 ms)</li>
+<li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_recommendationEmailSent()] (23 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_late_allDeliveryPropertiesAreFilled()] (19 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_multipleDeliveriesLate_newAverageSpeed()] (6 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_whenNextScheduled_upcomingDeliveryEmailSent()] (16 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_secondOverAllowedDelay_onTimeFalse()] (17 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_twoMinutesLate_onTimeTrue()] (18 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_averageSpeedIsUpdated()] (11 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_exactlyOnTime_onTimeTrue()] (5 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_exactlyOnAllowedDelay_onTimeFalse()] (7 ms)</li><li>kata.MapServiceTest.[engine:junit-jupiter]/[class:kata.MapServiceTest]/[method:updateAverageSpeed_lateDelivery_newAverageSpeed()] (10 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_secondBeforeAllowedDelay_onTimeTrue()] (16 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_withInAllowedTime_allDeliveryPropertiesAreFilled()] (37 ms)</li>
 </ul>
 
 <br/>
