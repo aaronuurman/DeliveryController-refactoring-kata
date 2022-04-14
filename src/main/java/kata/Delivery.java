@@ -1,5 +1,6 @@
 package kata;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -44,20 +45,8 @@ public final class Delivery {
         return timeOfDelivery;
     }
 
-    public void setTimeOfDelivery(LocalDateTime timeOfDelivery) {
-        this.timeOfDelivery = timeOfDelivery;
-    }
-
-    public void setArrived(boolean arrived) {
-        this.arrived = arrived;
-    }
-
     public boolean isOnTime() {
         return onTime;
-    }
-
-    public void setOnTime(boolean onTime) {
-        this.onTime = onTime;
     }
 
     @Override
@@ -93,5 +82,14 @@ public final class Delivery {
                 + ", arrived=" + arrived
                 + ", onTime=" + onTime
                 + '}';
+    }
+
+    public void update(DeliveryEvent deliveryEvent) {
+        Duration duration = Duration.between(getTimeOfDelivery(), deliveryEvent.timeOfDelivery());
+        if (duration.toMinutes() < DeliveryService.ALLOWED_DELAY_IN_MINUTES) {
+            this.onTime = true;
+        }
+        this.arrived = true;
+        this.timeOfDelivery = deliveryEvent.timeOfDelivery();
     }
 }

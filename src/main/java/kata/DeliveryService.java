@@ -15,14 +15,10 @@ public record DeliveryService(NotificationService notificationService, MapServic
         for (int i = 0; i < deliverySchedule.size(); i++) {
             Delivery delivery = deliverySchedule.get(i);
             if (deliveryEvent.id() == delivery.getId()) {
-                delivery.setArrived(true);
-                Duration d = Duration.between(delivery.getTimeOfDelivery(), deliveryEvent.timeOfDelivery());
+                delivery.update(deliveryEvent);
 
-                if (d.toMinutes() < ALLOWED_DELAY_IN_MINUTES) {
-                    delivery.setOnTime(true);
-                }
-                delivery.setTimeOfDelivery(deliveryEvent.timeOfDelivery());
                 notificationService.recommendToFriend(delivery);
+
                 if (deliverySchedule.size() > i + 1) {
                     nextDelivery = deliverySchedule.get(i + 1);
                 }
@@ -47,4 +43,5 @@ public record DeliveryService(NotificationService notificationService, MapServic
         }
         return deliverySchedule;
     }
+
 }
