@@ -11,30 +11,23 @@ public record DeliveryService(NotificationService notificationService, MapServic
     public static final int ALLOWED_DELAY_IN_MINUTES = 10;
 
     public List<Delivery> on(DeliveryEvent deliveryEvent, List<Delivery> deliverySchedule) {
-        Delivery nextDelivery = null;
-        for (int i = 0; i < deliverySchedule.size(); i++) {
-            Delivery delivery = deliverySchedule.get(i);
-            if (deliveryEvent.id() == delivery.getId()) {
-                delivery.update(deliveryEvent);
+        var deliverySchedule2 = new DeliverySchedule(deliverySchedule);
+        Delivery currentDelivery = deliverySchedule2.find(deliveryEvent.id());
+        currentDelivery.update(deliveryEvent);
 
-                notificationService.recommendToFriend(delivery);
+        notificationService.recommendToFriend(currentDelivery);
 
-                if (deliverySchedule.size() > i + 1) {
-                    nextDelivery = deliverySchedule.get(i + 1);
-                }
-
-                if (!delivery.isOnTime() && deliverySchedule.size() > 1 && i > 0) {
-                    var previousDelivery = deliverySchedule.get(i - 1);
-                    Duration elapsedTime = Duration.between(previousDelivery.getTimeOfDelivery(), delivery.getTimeOfDelivery());
-                    mapService.updateAverageSpeed(
-                            elapsedTime,
-                            previousDelivery.getCoordinates(),
-                            delivery.getCoordinates()
-                    );
-                }
-            }
+        if (!currentDelivery.isOnTime() && deliverySchedule2.weHaveMultipleDeliveriesAndCurrentDeliveryIsNotTheFirstOne()) {
+            var previousDelivery = deliverySchedule2.getPreviousDelivery();
+            Duration elapsedTime = Duration.between(previousDelivery.getTimeOfDelivery(), currentDelivery.getTimeOfDelivery());
+            mapService.updateAverageSpeed(
+                    elapsedTime,
+                    previousDelivery.getCoordinates(),
+                    currentDelivery.getCoordinates()
+            );
         }
 
+        Delivery nextDelivery = deliverySchedule2.getNextDelivery();
         if (nextDelivery != null) {
             var from = new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude());
             var to = nextDelivery.getCoordinates();
