@@ -1,6 +1,7 @@
 package kata;
 
 import java.util.List;
+import java.util.Optional;
 
 public class DeliverySchedule {
 
@@ -22,18 +23,19 @@ public class DeliverySchedule {
         throw new IllegalStateException();
     }
 
-    public Delivery getNextDelivery() {
-        if (deliveryList.size() > index + 1) {
-            return deliveryList.get(index + 1);
-        }
-        return null;
-    }
-
     public boolean weHaveMultipleDeliveriesAndCurrentDeliveryIsNotTheFirstOne() {
         return deliveryList.size() > 1 && index > 0;
     }
 
     public Delivery getPreviousDelivery() {
         return deliveryList.get(index - 1);
+    }
+
+    public Optional<Delivery> findNextDelivery() {
+        Delivery result = null;
+        if (deliveryList.size() > index + 1) {
+            result = deliveryList.get(index + 1);
+        }
+        return Optional.ofNullable(result);
     }
 }

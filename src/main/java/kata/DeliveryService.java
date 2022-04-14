@@ -27,14 +27,15 @@ public record DeliveryService(NotificationService notificationService, MapServic
             );
         }
 
-        Delivery nextDelivery = deliverySchedule2.getNextDelivery();
-        if (nextDelivery != null) {
-            var from = new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude());
-            var to = nextDelivery.getCoordinates();
-            var nextEta = mapService.calculateETAInMinutes(from, to);
-            notificationService.upcomingDelivery(nextDelivery, nextEta);
-        }
+        deliverySchedule2.findNextDelivery().ifPresent(delivery -> informNextDeliveryRecipientAboutNewEta(deliveryEvent, delivery));
         return deliverySchedule;
+    }
+
+    private void informNextDeliveryRecipientAboutNewEta(DeliveryEvent deliveryEvent, Delivery delivery) {
+        var from = new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude());
+        var to = delivery.getCoordinates();
+        var nextEta = mapService.calculateETAInMinutes(from, to);
+        notificationService.upcomingDelivery(delivery, nextEta);
     }
 
 }
