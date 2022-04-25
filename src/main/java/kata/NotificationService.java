@@ -25,27 +25,31 @@ public class NotificationService {
     }
 
     public void upcomingDelivery(Delivery delivery, Duration eta) {
-        var subject = "Your delivery will arrive soon";
-        var message = UPCOMING_DELIVERY_MESSAGE_TEMPLATE_FOR_EMAIL.formatted(
-                delivery.getCoordinates().latitude(),
-                delivery.getCoordinates().longitude(),
-                eta.toMinutes()
-        );
         if (delivery.hasPhoneNumber()) {
             smsGateway.send(delivery.getPhoneNumber(), UPCOMING_DELIVERY_MESSAGE_TEMPLATE_FOR_SMS.formatted(eta.toMinutes()));
         } else {
-            emailGateway.send(delivery.getContactEmail(), subject, message);
+            var subject = "Your delivery will arrive soon";
+            emailGateway.send(
+                    delivery.getContactEmail(),
+                    subject,
+                    UPCOMING_DELIVERY_MESSAGE_TEMPLATE_FOR_EMAIL.formatted(
+                            delivery.getCoordinates().latitude(),
+                            delivery.getCoordinates().longitude(),
+                            eta.toMinutes()
+                    ));
         }
     }
 
     public void recommendToFriend(Delivery delivery) {
-        var subject = "Your feedback is important to us";
         if (delivery.hasPhoneNumber()) {
-            var message = RECOMMENDATION_MESSAGE_TEMPLATE_FOR_SMS;
-            smsGateway.send(delivery.getPhoneNumber(), message);
+            smsGateway.send(delivery.getPhoneNumber(), RECOMMENDATION_MESSAGE_TEMPLATE_FOR_SMS);
         } else {
-            var message = RECOMMENDATION_MESSAGE_TEMPLATE_FOR_EMAIL.formatted(DATE_TIME_FORMATTER.format(delivery.getTimeOfDelivery()));
-            emailGateway.send(delivery.getContactEmail(), subject, message);
+            var subject = "Your feedback is important to us";
+            emailGateway.send(
+                    delivery.getContactEmail(),
+                    subject,
+                    RECOMMENDATION_MESSAGE_TEMPLATE_FOR_EMAIL.formatted(DATE_TIME_FORMATTER.format(delivery.getTimeOfDelivery()))
+            );
         }
     }
 
