@@ -6,11 +6,13 @@ import java.util.List;
 import jakarta.inject.Singleton;
 
 @Singleton
+// TODO: use class instead of record
 public record DeliveryService(NotificationService notificationService, MapService mapService) {
 
     public static final int ALLOWED_DELAY_IN_MINUTES = 10;
 
     public List<Delivery> on(DeliveryEvent deliveryEvent, List<Delivery> deliverySchedule) {
+        // TODO: Rename to something meaningful.
         var deliverySchedule2 = new DeliverySchedule(deliverySchedule);
         Delivery currentDelivery = deliverySchedule2.find(deliveryEvent.id());
         currentDelivery.update(deliveryEvent);
@@ -34,7 +36,7 @@ public record DeliveryService(NotificationService notificationService, MapServic
     }
 
     private void informNextDeliveryRecipientAboutNewEta(DeliveryEvent deliveryEvent, Delivery delivery) {
-        var from = new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude());
+        var from = deliveryEvent.getCoordinates();
         var to = delivery.getCoordinates();
         var nextEta = mapService.calculateETAInMinutes(from, to);
         notificationService.upcomingDelivery(delivery, nextEta);
