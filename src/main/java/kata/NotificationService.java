@@ -12,9 +12,6 @@ public class NotificationService {
     private EmailSender emailSender;
     private SmsSender smsSender;
 
-    private static final String RECOMMENDATION_MESSAGE_TEMPLATE_FOR_EMAIL = "Regarding your delivery today at %s. How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>";
-    private static final String RECOMMENDATION_MESSAGE_TEMPLATE_FOR_SMS = "How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>";
-
     public NotificationService(SendgridEmailGateway sendgridEmailGateway) {
         this(sendgridEmailGateway, null);
     }
@@ -28,31 +25,18 @@ public class NotificationService {
 
     public void upcomingDelivery(Delivery delivery, Duration eta) {
         if (delivery.hasPhoneNumber()) {
-            smsSender.sendUpcomingDeliverySms(delivery, eta);
+            smsSender.sendUpcomingDelivery(delivery, eta);
         } else {
-            emailSender.sendUpcomingDeliveryEmail(delivery, eta);
+            emailSender.sendUpcomingDelivery(delivery, eta);
         }
     }
 
     public void recommendToFriend(Delivery delivery) {
         if (delivery.hasPhoneNumber()) {
-            sendRecommendToFriendSms(delivery);
+            smsSender.sendRecommendToFriend(delivery);
         } else {
-            sendRecommendToFriendEmail(delivery);
+            emailSender.sendRecommendToFriend(delivery);
         }
-    }
-
-    private void sendRecommendToFriendEmail(Delivery delivery) {
-        var subject = "Your feedback is important to us";
-        emailGateway.send(
-                delivery.getContactEmail(),
-                subject,
-                RECOMMENDATION_MESSAGE_TEMPLATE_FOR_EMAIL.formatted(DATE_TIME_FORMATTER.format(delivery.getTimeOfDelivery()))
-        );
-    }
-
-    private void sendRecommendToFriendSms(Delivery delivery) {
-        smsGateway.send(delivery.getPhoneNumber(), RECOMMENDATION_MESSAGE_TEMPLATE_FOR_SMS);
     }
 
 }
