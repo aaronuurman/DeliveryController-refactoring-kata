@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import io.micronaut.core.util.StringUtils;
+
 public final class Delivery {
 
     private final Long id;
@@ -109,5 +111,9 @@ public final class Delivery {
                 + ", arrived=" + arrived
                 + ", onTime=" + onTime
                 + '}';
+    }
+
+    public boolean hasPhoneNumber() {
+        return StringUtils.isNotEmpty(getPhoneNumber());
     }
 }

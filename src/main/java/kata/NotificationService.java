@@ -3,8 +3,6 @@ package kata;
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 
-import io.micronaut.core.util.StringUtils;
-
 public class NotificationService {
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -31,21 +29,21 @@ public class NotificationService {
                 delivery.getCoordinates().longitude(),
                 eta.toMinutes()
         );
-        if (StringUtils.isEmpty(delivery.getPhoneNumber())) {
-            emailGateway.send(delivery.getContactEmail(), subject, message);
+        if (delivery.hasPhoneNumber()) {
+            smsGateway.send(delivery.getPhoneNumber(), message);
         }
         else {
-            smsGateway.send(delivery.getPhoneNumber(), message);
+            emailGateway.send(delivery.getContactEmail(), subject, message);
         }
     }
 
     public void recommendToFriend(Delivery delivery) {
         var subject = "Your feedback is important to us";
         var message = RECOMMENDATION_MESSAGE_TEMPLATE.formatted(DATE_TIME_FORMATTER.format(delivery.getTimeOfDelivery()));
-        if (StringUtils.isEmpty(delivery.getPhoneNumber())) {
-            emailGateway.send(delivery.getContactEmail(), subject, message);
-        } else {
+        if (delivery.hasPhoneNumber()) {
             smsGateway.send(delivery.getPhoneNumber(), message);
+        } else {
+            emailGateway.send(delivery.getContactEmail(), subject, message);
         }
     }
 
