@@ -12,6 +12,7 @@ public final class Delivery {
     private LocalDateTime timeOfDelivery;
     private boolean arrived;
     private boolean onTime;
+    private final String phoneNumber;
 
     public Delivery(
             Long id,
@@ -21,12 +22,25 @@ public final class Delivery {
             boolean arrived,
             boolean onTime
     ) {
+        this(id, contactEmail, coordinates, timeOfDelivery, arrived, onTime, null);
+    }
+
+    public Delivery(
+            long id,
+            String contactEmail,
+            Coordinates coordinates,
+            LocalDateTime timeOfDelivery,
+            boolean arrived,
+            boolean onTime,
+            String phoneNumber
+    ) {
         this.id = id;
         this.contactEmail = contactEmail;
         this.coordinates = coordinates;
         this.timeOfDelivery = timeOfDelivery;
         this.arrived = arrived;
         this.onTime = onTime;
+        this.phoneNumber = phoneNumber;
     }
 
     public long getId() {
@@ -39,6 +53,10 @@ public final class Delivery {
 
     public Coordinates getCoordinates() {
         return coordinates;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public LocalDateTime getTimeOfDelivery() {
