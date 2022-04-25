@@ -1,5 +1,6 @@
 package kata;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -40,6 +41,29 @@ public class NotificationServiceTest {
                 false,
                 phoneNumber
         ));
+
+        // Assert
+        verify(smsMock, times(1)).send(phoneNumber, message);
+    }
+
+    @Test
+    void upcomingDelivery_withPhoneNumber_sendsSms() {
+        // Arrange
+        var time = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
+        var notificationService = new NotificationService(sendgridEmailGatewayMock, smsMock);
+        String phoneNumber = "+372 555555555";
+        var message = "Your delivery to [57.840694,27.004316] is next, estimated time of arrival is in 0 minutes. Be ready!";
+
+        // Act
+        notificationService.upcomingDelivery(new Delivery(
+                124L,
+                "test2@example.com",
+                VORU_LEPA_2,
+                time,
+                false,
+                false,
+                phoneNumber
+        ), Duration.ZERO);
 
         // Assert
         verify(smsMock, times(1)).send(phoneNumber, message);

@@ -31,7 +31,12 @@ public class NotificationService {
                 delivery.getCoordinates().longitude(),
                 eta.toMinutes()
         );
-        emailGateway.send(delivery.getContactEmail(), subject, message);
+        if (StringUtils.isEmpty(delivery.getPhoneNumber())) {
+            emailGateway.send(delivery.getContactEmail(), subject, message);
+        }
+        else {
+            smsGateway.send(delivery.getPhoneNumber(), message);
+        }
     }
 
     public void recommendToFriend(Delivery delivery) {
