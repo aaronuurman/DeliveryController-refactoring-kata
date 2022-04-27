@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static kata.factories.DeliveryEventFactory.DELIVERY_TIME;
-import static kata.factories.DeliveryFactory.createDeliveryWithTime;
+import static kata.factories.DeliveryFactory.createDeliveryWithoutPhoneNumber;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -23,7 +23,7 @@ public class EmailSenderTest {
     void sendUpcomingDelivery_recommendationEmailSent() {
         // Arrange
         var emailSender = new EmailSender(sendgridEmailGatewayMock);
-        var delivery = createDeliveryWithTime(DELIVERY_TIME);
+        var delivery = createDeliveryWithoutPhoneNumber(DELIVERY_TIME);
 
         // Act
         emailSender.sendRecommendToFriend(delivery);
@@ -40,7 +40,7 @@ public class EmailSenderTest {
     void sendUpcomingDelivery_sendUpcomingDelivery() {
         // Arrange
         var emailSender = new EmailSender(sendgridEmailGatewayMock);
-        var delivery = createDeliveryWithTime(DELIVERY_TIME);
+        var delivery = createDeliveryWithoutPhoneNumber(DELIVERY_TIME);
 
         // Act
         emailSender.sendUpcomingDelivery(delivery, Duration.ofMinutes(10));

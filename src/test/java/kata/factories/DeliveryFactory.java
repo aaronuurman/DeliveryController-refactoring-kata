@@ -14,7 +14,7 @@ public final class DeliveryFactory {
     private DeliveryFactory() {
     }
 
-    public static Delivery createDeliveryWithTime(LocalDateTime deliveryTime) {
+    public static Delivery createDeliveryWithoutPhoneNumber(LocalDateTime deliveryTime) {
         return new Delivery(
                 123L,
                 "test1@example.com",
@@ -24,14 +24,25 @@ public final class DeliveryFactory {
                 false
         );
     }
+    public static Delivery createDeliveryWithPhoneNumber(LocalDateTime deliveryTime) {
+        return new Delivery(
+                123L,
+                "test1@example.com",
+                TARTU_TURU_29B,
+                deliveryTime,
+                false,
+                false,
+                "+372 1111111111"
+        );
+    }
 
     public static List<Delivery> createScheduleWithSingleDelivery(LocalDateTime deliveryTime) {
-        return List.of(createDeliveryWithTime(deliveryTime));
+        return List.of(createDeliveryWithoutPhoneNumber(deliveryTime));
     }
 
     public static List<Delivery> createOnTimeScheduleWithTwoDeliveries(LocalDateTime deliveryTime) {
         return List.of(
-                createDeliveryWithTime(deliveryTime),
+                createDeliveryWithoutPhoneNumber(deliveryTime),
                 new Delivery(
                         124L,
                         "test2@example.com",
@@ -48,7 +59,7 @@ public final class DeliveryFactory {
      */
     public static List<Delivery> createLateScheduleWithThreeDeliveries(LocalDateTime deliveryTime) {
         return List.of(
-                createDeliveryWithTime(deliveryTime.minusMinutes(132)),
+                createDeliveryWithoutPhoneNumber(deliveryTime.minusMinutes(132)),
                 new Delivery(
                         124L,
                         "test2@example.com",
