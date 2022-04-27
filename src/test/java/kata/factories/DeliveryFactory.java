@@ -14,7 +14,7 @@ public final class DeliveryFactory {
     private DeliveryFactory() {
     }
 
-    private static Delivery createDeliveryWithTime(LocalDateTime deliveryTime) {
+    public static Delivery createDeliveryWithTime(LocalDateTime deliveryTime) {
         return new Delivery(
                 123L,
                 "test1@example.com",
