@@ -27,7 +27,7 @@ public class NotificationServiceTest {
     void recommendToFriend_withPhoneNumber_sendsSms() {
         // Arrange
         var time = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
-        var notificationService = new NotificationService(sendgridEmailGatewayMock, smsMock);
+        var notificationService = new NotificationService(new EmailSender(sendgridEmailGatewayMock), new SmsSender(smsMock));
         var message = "How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>";
         String phoneNumber = "+372 555555555";
 
@@ -50,7 +50,7 @@ public class NotificationServiceTest {
     void upcomingDelivery_withPhoneNumber_sendsSms() {
         // Arrange
         var time = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
-        var notificationService = new NotificationService(sendgridEmailGatewayMock, smsMock);
+        var notificationService = new NotificationService(new EmailSender(sendgridEmailGatewayMock), new SmsSender(smsMock));
         String phoneNumber = "+372 555555555";
         var message = "Your delivery arrives in 0 minutes.";
 

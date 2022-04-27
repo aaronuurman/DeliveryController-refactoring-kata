@@ -24,15 +24,14 @@ import static org.mockito.Mockito.when;
 class DeliveryServiceTest {
 
     private MapService mapServiceMock;
-    private SendgridEmailGateway sendgridEmailGatewayMock;
     private DeliveryService deliveryService;
+    private NotificationService notificationServiceMock;
 
     @BeforeEach
     void setup() {
         mapServiceMock = mock(MapService.class);
-        sendgridEmailGatewayMock = mock(SendgridEmailGateway.class);
-        var notificationService = new NotificationService(sendgridEmailGatewayMock);
-        deliveryService = new DeliveryService(notificationService, mapServiceMock);
+        notificationServiceMock = mock(NotificationService.class);
+        deliveryService = new DeliveryService(notificationServiceMock, mapServiceMock);
     }
 
     @Test
@@ -136,11 +135,7 @@ class DeliveryServiceTest {
         deliveryService.on(deliveryEvent, schedule);
 
         // Arrange
-        verify(sendgridEmailGatewayMock).send(
-                "test1@example.com",
-                "Your feedback is important to us",
-                "Regarding your delivery today at 2022-03-14 16:34. How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>"
-        );
+        verify(notificationServiceMock).recommendToFriend(schedule.get(0));
     }
 
     @Test
@@ -148,17 +143,14 @@ class DeliveryServiceTest {
         // Arrange
         var deliveryEvent = createDeliveryEvent();
         var schedule = createOnTimeScheduleWithTwoDeliveries(DELIVERY_TIME.plusMinutes(2));
-        when(mapServiceMock.calculateETAInMinutes(any(), any())).thenReturn(Duration.ofMinutes(10));
+        Duration duration = Duration.ofMinutes(10);
+        when(mapServiceMock.calculateETAInMinutes(any(), any())).thenReturn(duration);
 
         // Act
         deliveryService.on(deliveryEvent, schedule);
 
         // Arrange
-        verify(sendgridEmailGatewayMock).send(
-                "test2@example.com",
-                "Your delivery will arrive soon",
-                "Your delivery to [57.840694,27.004316] is next, estimated time of arrival is in 10 minutes. Be ready!"
-        );
+        verify(notificationServiceMock).upcomingDelivery(schedule.get(1), duration);
     }
 
     @Test
@@ -166,17 +158,14 @@ class DeliveryServiceTest {
         // Arrange
         var deliveryEvent = createDeliveryEvent(124);
         var schedule = createLateScheduleWithThreeDeliveries(DELIVERY_TIME.minusMinutes(15));
-        when(mapServiceMock.calculateETAInMinutes(any(), any())).thenReturn(Duration.ofMinutes(10));
+        Duration duration = Duration.ofMinutes(10);
+        when(mapServiceMock.calculateETAInMinutes(any(), any())).thenReturn(duration);
 
         // Act
         deliveryService.on(deliveryEvent, schedule);
 
         // Arrange
-        verify(sendgridEmailGatewayMock).send(
-                "test3@example.com",
-                "Your delivery will arrive soon",
-                "Your delivery to [58.362286,25.58746] is next, estimated time of arrival is in 10 minutes. Be ready!"
-        );
+        verify(notificationServiceMock).upcomingDelivery(schedule.get(2), duration);
     }
 
     @Test
@@ -190,9 +179,10 @@ class DeliveryServiceTest {
         deliveryService.on(deliveryEvent, schedule);
 
         // Assert
-        verify(mapServiceMock, times(1)).updateAverageSpeed(Duration.ofMinutes(147),
-                                                            new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude()),
-                                                            VORU_LEPA_2);
+        verify(mapServiceMock, times(1)).updateAverageSpeed(
+                Duration.ofMinutes(147),
+                new Coordinates(deliveryEvent.latitude(), deliveryEvent.longitude()),
+                VORU_LEPA_2);
     }
 
     // TODO: Create test case, where delivery is early with next scheduled delivery. Validate that also then. mapService.updateAverageSpeed() is called.

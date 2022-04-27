@@ -69,6 +69,10 @@ public final class Delivery {
         return onTime;
     }
 
+    public boolean hasPhoneNumber() {
+        return StringUtils.isNotEmpty(getPhoneNumber());
+    }
+
     public void update(DeliveryEvent deliveryEvent) {
         Duration duration = Duration.between(getTimeOfDelivery(), deliveryEvent.timeOfDelivery());
         if (duration.toMinutes() < DeliveryService.ALLOWED_DELAY_IN_MINUTES) {
@@ -111,9 +115,5 @@ public final class Delivery {
                 + ", arrived=" + arrived
                 + ", onTime=" + onTime
                 + '}';
-    }
-
-    public boolean hasPhoneNumber() {
-        return StringUtils.isNotEmpty(getPhoneNumber());
     }
 }

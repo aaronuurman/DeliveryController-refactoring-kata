@@ -6,22 +6,28 @@ import java.util.List;
 import jakarta.inject.Singleton;
 
 @Singleton
-// TODO: use class instead of record
-public record DeliveryService(NotificationService notificationService, MapService mapService) {
+public class DeliveryService {
+
+    private final NotificationService notificationService;
+    private final MapService mapService;
+
+    public DeliveryService(NotificationService notificationService, MapService mapService) {
+        this.notificationService = notificationService;
+        this.mapService = mapService;
+    }
 
     public static final int ALLOWED_DELAY_IN_MINUTES = 10;
 
-    public List<Delivery> on(DeliveryEvent deliveryEvent, List<Delivery> deliverySchedule) {
-        // TODO: Rename to something meaningful.
-        var deliverySchedule2 = new DeliverySchedule(deliverySchedule);
-        Delivery currentDelivery = deliverySchedule2.find(deliveryEvent.id());
+    public List<Delivery> on(DeliveryEvent deliveryEvent, List<Delivery> deliveryList) {
+        var deliverySchedule = new DeliverySchedule(deliveryList);
+        Delivery currentDelivery = deliverySchedule.find(deliveryEvent.id());
         currentDelivery.update(deliveryEvent);
 
         notificationService.recommendToFriend(currentDelivery);
 
-        deliverySchedule2.getPreviousDelivery().ifPresent(delivery -> maybeUpdateAverageSpeed(currentDelivery, delivery));
-        deliverySchedule2.findNextDelivery().ifPresent(delivery -> informNextDeliveryRecipientAboutNewEta(deliveryEvent, delivery));
-        return deliverySchedule;
+        deliverySchedule.getPreviousDelivery().ifPresent(delivery -> maybeUpdateAverageSpeed(currentDelivery, delivery));
+        deliverySchedule.findNextDelivery().ifPresent(delivery -> informNextDeliveryRecipientAboutNewEta(deliveryEvent, delivery));
+        return deliveryList;
     }
 
     private void maybeUpdateAverageSpeed(Delivery currentDelivery, Delivery delivery) {
