@@ -1,72 +1,52 @@
 package kata;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static kata.NotificationService.DATE_TIME_FORMATTER;
-import static kata.factories.CoordinatesFactory.VORU_LEPA_2;
+import static kata.factories.DeliveryEventFactory.DELIVERY_TIME;
+import static kata.factories.DeliveryFactory.createDeliveryWithPhoneNumber;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class NotificationServiceTest {
 
-    private SendgridEmailGateway sendgridEmailGatewayMock;
-    private SmsGateway smsMock;
+    private EmailSender emailSenderMock;
+    private SmsSender smsSenderMock;
 
     @BeforeEach
     void setUp() {
-        sendgridEmailGatewayMock = mock(SendgridEmailGateway.class);
-        smsMock = mock(SmsGateway.class);
+        emailSenderMock = mock(EmailSender.class);
+        smsSenderMock = mock(SmsSender.class);
     }
 
     @Test
     void recommendToFriend_withPhoneNumber_sendsSms() {
         // Arrange
-        var time = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
-        var notificationService = new NotificationService(new EmailSender(sendgridEmailGatewayMock), new SmsSender(smsMock));
-        var message = "How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>";
-        String phoneNumber = "+372 555555555";
+        var notificationService = new NotificationService(emailSenderMock, smsSenderMock);
+        var delivery = createDeliveryWithPhoneNumber(DELIVERY_TIME);
 
         // Act
-        notificationService.recommendToFriend(new Delivery(
-                124L,
-                "test2@example.com",
-                VORU_LEPA_2,
-                time,
-                false,
-                false,
-                phoneNumber
-        ));
+        notificationService.recommendToFriend(delivery);
 
         // Assert
-        verify(smsMock, times(1)).send(phoneNumber, message);
+        verify(smsSenderMock, times(1)).sendRecommendToFriend(delivery);
     }
 
     @Test
     void upcomingDelivery_withPhoneNumber_sendsSms() {
         // Arrange
-        var time = LocalDateTime.parse("2022-03-14 16:34", DATE_TIME_FORMATTER);
-        var notificationService = new NotificationService(new EmailSender(sendgridEmailGatewayMock), new SmsSender(smsMock));
-        String phoneNumber = "+372 555555555";
-        var message = "Your delivery arrives in 0 minutes.";
+        var notificationService = new NotificationService(emailSenderMock, smsSenderMock);
+        var delivery = createDeliveryWithPhoneNumber(DELIVERY_TIME);
+        Duration duration = Duration.ZERO;
 
         // Act
-        notificationService.upcomingDelivery(new Delivery(
-                124L,
-                "test2@example.com",
-                VORU_LEPA_2,
-                time,
-                false,
-                false,
-                phoneNumber
-        ), Duration.ZERO);
+        notificationService.upcomingDelivery(delivery, duration);
 
         // Assert
-        verify(smsMock, times(1)).send(phoneNumber, message);
+        verify(smsSenderMock, times(1)).sendUpcomingDelivery(delivery, duration);
     }
 
 }

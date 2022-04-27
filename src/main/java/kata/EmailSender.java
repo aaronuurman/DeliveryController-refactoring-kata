@@ -4,7 +4,7 @@ import java.time.Duration;
 
 import static kata.NotificationService.DATE_TIME_FORMATTER;
 
-public final class EmailSender implements Sender {
+public class EmailSender implements Sender {
 
     public static final String UPCOMING_DELIVERY_MESSAGE_TEMPLATE_FOR_EMAIL = "Your delivery to [%s,%s] is next, estimated time of arrival is in %s minutes. Be ready!";
     private static final String RECOMMENDATION_MESSAGE_TEMPLATE_FOR_EMAIL = "Regarding your delivery today at %s. How likely would you be to recommend this delivery service to a friend? Click <a href='url'>here</a>";
