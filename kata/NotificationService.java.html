@@ -345,7 +345,7 @@
 
 
 <tr>
-<td class='uncovered'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@5bf22f18_23'/>
 23
 </td>
@@ -356,7 +356,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class=''>            sender = emailSender;</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>            sender = emailSender;</span></pre></td></tr>
 
 
 <tr>
@@ -600,7 +600,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@5bf22f18_20'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getSender<br/><b>Killed by : </b>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:upcomingDelivery_withPhoneNumber_sendsSms()]</span></span> negated conditional &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getSender<br/><b>Killed by : </b>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:upcomingDelivery_withoutPhoneNumber_sendsEmail()]</span></span> negated conditional &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -610,7 +610,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@5bf22f18_25'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getSender<br/><b>Killed by : </b>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:upcomingDelivery_withPhoneNumber_sendsSms()]</span></span> replaced return value with null for kata/NotificationService::getSender &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getSender<br/><b>Killed by : </b>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:upcomingDelivery_withoutPhoneNumber_sendsEmail()]</span></span> replaced return value with null for kata/NotificationService::getSender &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -620,7 +620,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@5bf22f18_30'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>upcomingDelivery<br/><b>Killed by : </b>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:upcomingDelivery_withPhoneNumber_sendsSms()]</span></span> removed call to kata/Sender::sendUpcomingDelivery &rarr; KILLED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>upcomingDelivery<br/><b>Killed by : </b>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:upcomingDelivery_withoutPhoneNumber_sendsEmail()]</span></span> removed call to kata/Sender::sendUpcomingDelivery &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -655,7 +655,7 @@
 
 <h2>Tests examined</h2>
 <ul>
-<li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_averageSpeedIsUpdated()] (11 ms)</li><li>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:recommendToFriend_withPhoneNumber_sendsSms()] (16 ms)</li><li>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:upcomingDelivery_withPhoneNumber_sendsSms()] (5 ms)</li>
+<li>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:upcomingDelivery_withoutPhoneNumber_sendsEmail()] (4 ms)</li><li>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:recommendToFriend_withoutPhoneNumber_sendsEmail()] (17 ms)</li><li>kata.DeliveryServiceTest.[engine:junit-jupiter]/[class:kata.DeliveryServiceTest]/[method:onDelivery_averageSpeedIsUpdated()] (17 ms)</li><li>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:recommendToFriend_withPhoneNumber_sendsSms()] (8 ms)</li><li>kata.NotificationServiceTest.[engine:junit-jupiter]/[class:kata.NotificationServiceTest]/[method:upcomingDelivery_withPhoneNumber_sendsSms()] (18 ms)</li>
 </ul>
 
 <br/>
