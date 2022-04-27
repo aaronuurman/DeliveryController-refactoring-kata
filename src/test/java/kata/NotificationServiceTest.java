@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static kata.factories.DeliveryEventFactory.DELIVERY_TIME;
 import static kata.factories.DeliveryFactory.createDeliveryWithPhoneNumber;
+import static kata.factories.DeliveryFactory.createDeliveryWithoutPhoneNumber;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -47,6 +48,33 @@ public class NotificationServiceTest {
 
         // Assert
         verify(smsSenderMock, times(1)).sendUpcomingDelivery(delivery, duration);
+    }
+
+    @Test
+    void recommendToFriend_withoutPhoneNumber_sendsEmail() {
+        // Arrange
+        var notificationService = new NotificationService(emailSenderMock, smsSenderMock);
+        var delivery = createDeliveryWithoutPhoneNumber(DELIVERY_TIME);
+
+        // Act
+        notificationService.recommendToFriend(delivery);
+
+        // Assert
+        verify(emailSenderMock, times(1)).sendRecommendToFriend(delivery);
+    }
+
+    @Test
+    void upcomingDelivery_withoutPhoneNumber_sendsEmail() {
+        // Arrange
+        var notificationService = new NotificationService(emailSenderMock, smsSenderMock);
+        var delivery = createDeliveryWithoutPhoneNumber(DELIVERY_TIME);
+        Duration duration = Duration.ZERO;
+
+        // Act
+        notificationService.upcomingDelivery(delivery, duration);
+
+        // Assert
+        verify(emailSenderMock, times(1)).sendUpcomingDelivery(delivery, duration);
     }
 
 }
